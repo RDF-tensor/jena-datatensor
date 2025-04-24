@@ -13,7 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
-import pl.edu.pw.mini.jena.datatensor.aggregators.DTAggregates;
+import pl.edu.pw.mini.jena.datatensor.aggregates.DTAggregates;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 public class AggregatesTest {
     static String NL = System.getProperty("line.separator");
     static String PRE = StrUtils.strjoinNL(
-            "PREFIX dta: <https://w3id.org/rdf-tensor/aggregators#>",
+            "PREFIX dta: <https://w3id.org/rdf-tensor/aggregates#>",
             "PREFIX dt: <https://w3id.org/rdf-tensor/datatypes#>");
     static DatasetGraph ds = SSE.parseDatasetGraph(
             "(dataset (graph (:x :p1 \"{\\\"type\\\":\\\"int32\\\",\\\"shape\\\":[3],\\\"data\\\":[10, 20, 30]}\"^^dt:NumericDataTensor)" +
@@ -46,11 +46,11 @@ public class AggregatesTest {
 
     @Test
     public void agg_stat_registry() {
-        assertTrue(AggregateRegistry.isRegistered("https://w3id.org/rdf-tensor/aggregators#avg"));
-        assertTrue(AggregateRegistry.isRegistered("https://w3id.org/rdf-tensor/aggregators#var"));
-        assertTrue(AggregateRegistry.isRegistered("https://w3id.org/rdf-tensor/aggregators#std"));
-        assertTrue(AggregateRegistry.isRegistered("https://w3id.org/rdf-tensor/aggregators#sum"));
-        assertFalse(AggregateRegistry.isRegistered("https://w3id.org/rdf-tensor/aggregators#avg2"));
+        assertTrue(AggregateRegistry.isRegistered("https://w3id.org/rdf-tensor/aggregates#avg"));
+        assertTrue(AggregateRegistry.isRegistered("https://w3id.org/rdf-tensor/aggregates#var"));
+        assertTrue(AggregateRegistry.isRegistered("https://w3id.org/rdf-tensor/aggregates#std"));
+        assertTrue(AggregateRegistry.isRegistered("https://w3id.org/rdf-tensor/aggregates#sum"));
+        assertFalse(AggregateRegistry.isRegistered("https://w3id.org/rdf-tensor/aggregates#avg2"));
     }
 
     @Test

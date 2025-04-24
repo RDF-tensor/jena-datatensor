@@ -1,4 +1,31 @@
-site_name: RDF datatensors
-# site_url: https://mydomain.org/mysite # TODO
+site_name: Data tensors in RDF
+site_url: https://rdf-tensor.github.io/jena-datatensor/
 theme:
   name: material
+  features:
+    # Behave like an SPA
+    - navigation.instant
+    - navigation.instant.progress
+    # Update anchors in the address bar
+    - navigation.tracking
+    - navigation.top
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+
+markdown_extensions:
+  - attr_list
+  - admonition
+
+nav:
+  - Specification: 'index.md'
+  - Ontology:
+    - RDF datatypes: 'ontology/datatypes.md'
+    - SPARQL functions: 'ontology/functions.md'
+    - SPARQL aggregates: 'ontology/aggregates.md'
+  - Jena implementation: 'https://github.com/RDF-tensor/jena-datatensor/tree/main/jena-datatensor'
+  - Example dataset & queries: 'https://github.com/RDF-tensor/jena-datatensor/tree/main/example_dataset_and_queries'
+  - Paper: 'index.md' # TODO

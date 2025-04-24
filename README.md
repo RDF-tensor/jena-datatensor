@@ -1,8 +1,8 @@
 # jena-datatensor
 
-`jena-datatensor` is an extension for Apache Jena that introduces 2 new datatypes, 36 SPARQL functions, and 6 new aggregators to enhance the processing of data tensors within RDF models.
+`jena-datatensor` is an extension for Apache Jena that introduces 2 new datatypes, 36 SPARQL functions, and 6 new aggregates to enhance the processing of data tensors within RDF models.
 
-`example_dataset_and_queries` contains a sligthly modified subset of CS publications knowledge graph, which was a part of [bachelor thesis](https://repo.pw.edu.pl/info/bachelor/WUTb11175cba06e497caab92c07f490c673?r=supervisedwork&ps=20&tab=&title=Engineers%2B%2B%2BBachelors%2Btheses%2B%25E2%2580%2593%2BComputer%2Bscience%2Bpublications%2Bknowledge%2Bgraph%2B%25E2%2580%2593%2BWarsaw%2BUniversity%2Bof%2BTechnology&lang=en) and queries to demonstrate the usage of the implemented functions and aggregators.
+`example_dataset_and_queries` contains a sligthly modified subset of CS publications knowledge graph, which was a part of [bachelor thesis](https://repo.pw.edu.pl/info/bachelor/WUTb11175cba06e497caab92c07f490c673?r=supervisedwork&ps=20&tab=&title=Engineers%2B%2B%2BBachelors%2Btheses%2B%25E2%2580%2593%2BComputer%2Bscience%2Bpublications%2Bknowledge%2Bgraph%2B%25E2%2580%2593%2BWarsaw%2BUniversity%2Bof%2BTechnology&lang=en) and queries to demonstrate the usage of the implemented functions and aggregates.
 This dataset is under fair use license and is provided for educational purposes only.
 
 ## Features
@@ -13,7 +13,7 @@ This dataset is under fair use license and is provided for educational purposes 
 - **36 New SPARQL Functions:**
   - Tensor manipulations (addition, multiplication, reshaping, etc.)
   - Algebraic computations
-- **6 New Aggregators:**
+- **6 New Aggregates:**
   - Generalized aggregation functions for numerical tensors
   - Sum, average, variance, and standard deviation computations
 
@@ -101,10 +101,10 @@ The table below lists the implemented SPARQL functions, including their input ar
 | `dtf:euclideanDistance` | Computes Euclidean distance | Two numerical tensors | Numeric scalar |
 
 
-## Implemented Aggregators
+## Implemented Aggregates
 
-The table below lists the implemented aggregation functions, which operate on `NumericDataTensor` inputs and return `NumericDataTensor` results. These aggregators generalize standard aggregation functions for numerical tensors and do not support the `DISTINCT` keyword.
-The `dta` prefix set to `https://w3id.org/rdf-tensor/aggregators#`)
+The table below lists the implemented aggregation functions, which operate on `NumericDataTensor` inputs and return `NumericDataTensor` results. These aggregates generalize standard aggregation functions for numerical tensors and do not support the `DISTINCT` keyword.
+The `dta` prefix set to `https://w3id.org/rdf-tensor/aggregates#`)
 
 | **IRI (with Turtle prefix)** | **Description**                        |
 | -----------------------------|----------------------------------------|

@@ -10,7 +10,7 @@ dt:NumericDataTensor  a rdfs:Datatype ;
   rdfs:comment "The datatype for a tensor representing numeric data."@en ;
   dc:description "The datatype for a tensor representing numeric data."@en ;
   skos:definition "The datatype for a tensor representing numeric data."@en ;
-  dc:creator "Marciniak Piotr" .
+  dc:creator "Piotr Marciniak" .
 
 dt:BooleanDataTensor  a rdfs:Datatype ;
   dc:date "2024-07-28"^^xsd:date ;
@@ -18,5 +18,5 @@ dt:BooleanDataTensor  a rdfs:Datatype ;
   rdfs:comment "The datatype for a tensor representing boolean data."@en ;
   dc:description "The datatype for a tensor representing boolean data."@en ;
   skos:definition "The datatype for a tensor representing boolean data."@en ;
-  dc:creator "Marciniak Piotr" .
+  dc:creator "Piotr Marciniak" .
     

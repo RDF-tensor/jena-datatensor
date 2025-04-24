@@ -1,0 +1,3 @@
+# SPARQL aggregates ontology
+
+TODO

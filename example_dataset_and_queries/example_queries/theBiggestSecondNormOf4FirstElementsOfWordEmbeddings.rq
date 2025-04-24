@@ -1,6 +1,6 @@
 PREFIX dt: <https://w3id.org/rdf-tensor/datatypes#>
 PREFIX dtf: <https://w3id.org/rdf-tensor/functions#>
-PREFIX dta: <https://w3id.org/rdf-tensor/aggregators#>
+PREFIX dta: <https://w3id.org/rdf-tensor/aggregates#>
 PREFIX ocs_papers: <https://w3id.org/ocs/ont/papers/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX fabio: <http://purl.org/spar/fabio/>

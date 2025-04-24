@@ -1,4 +1,4 @@
-package pl.edu.pw.mini.jena.datatensor.aggregators;
+package pl.edu.pw.mini.jena.datatensor.aggregates;
 
 import org.apache.jena.datatypes.RDFDatatype;
 import org.apache.jena.graph.NodeFactory;
