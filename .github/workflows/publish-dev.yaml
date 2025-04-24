@@ -43,3 +43,16 @@ jobs:
           git config user.name ci-bot
           git config user.email ci-bot@example.com
           mkdocs gh-deploy --remote-branch gh-pages --remote-name origin --force
+
+      - name: 'Publish ontology files'
+        uses: ncipollo/release-action@v1.16.0
+        with:
+          allowUpdates: true
+          prerelease: true
+          draft: false
+          omitDraftDuringUpdate: false
+          makeLatest: false
+          tag: dev
+          name: "Development build"
+          artifacts: 'publish/*'
+          generateReleaseNotes: true
