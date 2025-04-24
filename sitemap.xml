@@ -1,3 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://rdf-tensor.github.io/jena-datatensor/</loc>
+         <lastmod>2025-04-24</lastmod>
+    </url>
+    <url>
+         <loc>https://rdf-tensor.github.io/jena-datatensor/ontology/aggregates/</loc>
+         <lastmod>2025-04-24</lastmod>
+    </url>
+    <url>
+         <loc>https://rdf-tensor.github.io/jena-datatensor/ontology/datatypes/</loc>
+         <lastmod>2025-04-24</lastmod>
+    </url>
+    <url>
+         <loc>https://rdf-tensor.github.io/jena-datatensor/ontology/functions/</loc>
+         <lastmod>2025-04-24</lastmod>
+    </url>
 </urlset>
