@@ -449,6 +449,46 @@
 
 <h1 id="sparql-aggregates-ontology">SPARQL aggregates ontology</h1>
 <p>TODO</p>
+<pre><code class="language-ttl">PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt;
+PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+PREFIX dta: &lt;https://w3id.org/rdf-tensor/aggregates#&gt;
+PREFIX sd: &lt;http://www.w3.org/ns/sparql-service-description#&gt;
+
+dta:sum  a               sd:Aggregate;
+        dc:date          &quot;2024-07-28&quot;^^xsd:date;
+        rdfs:label       &quot;Sum&quot;;
+        rdfs:comment     &quot;Sums grouped tensors&quot;@en;
+        dc:description   &quot;Sums grouped tensors&quot;@en;
+        skos:definition  &quot;Sums grouped tensors&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dta:avg  a               sd:Aggregate;
+        dc:date          &quot;2024-07-28&quot;^^xsd:date;
+        rdfs:label       &quot;Average&quot;;
+        rdfs:comment     &quot;Averages grouped tensors by summing them elementwise and dividing the result by the number of tensors&quot;@en;
+        dc:description   &quot;Averages grouped tensors by summing them elementwise and dividing the result by the number of tensors&quot;@en;
+        skos:definition  &quot;Averages grouped tensors by summing them elementwise and dividing the result by the number of tensors&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dta:var  a               sd:Aggregate;
+        dc:date          &quot;2024-07-28&quot;^^xsd:date;
+        rdfs:label       &quot;Variance&quot;;
+        rdfs:comment     &quot;Calculates the variance of grouped tensors&quot;@en;
+        dc:description   &quot;Calculates the variance of grouped tensors&quot;@en;
+        skos:definition  &quot;Calculates the variance of grouped tensors&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dta:std  a               sd:Aggregate;
+        dc:date          &quot;2024-07-28&quot;^^xsd:date;
+        rdfs:label       &quot;Standard Deviation&quot;;
+        rdfs:comment     &quot;Calculates the standard deviation of grouped tensors&quot;@en;
+        dc:description   &quot;Calculates the standard deviation of grouped tensors&quot;@en;
+        skos:definition  &quot;Calculates the standard deviation of grouped tensors&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+</code></pre>
 
 
 

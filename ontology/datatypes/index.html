@@ -449,6 +449,29 @@
 
 <h1 id="rdf-datatypes-ontology">RDF datatypes ontology</h1>
 <p>TODO</p>
+<pre><code class="language-ttl">PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt;
+PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+PREFIX dt: &lt;https://w3id.org/rdf-tensor/datatypes#&gt;
+
+dt:NumericDataTensor  a  rdfs:Datatype;
+        dc:date          &quot;2024-07-28&quot;^^xsd:date;
+        rdfs:label       &quot;Numeric Data Tensor&quot;;
+        rdfs:comment     &quot;The datatype for a tensor representing numeric data.&quot;@en;
+        dc:description   &quot;The datatype for a tensor representing numeric data.&quot;@en;
+        skos:definition  &quot;The datatype for a tensor representing numeric data.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dt:BooleanDataTensor  a  rdfs:Datatype;
+        dc:date          &quot;2024-07-28&quot;^^xsd:date;
+        rdfs:label       &quot;Boolean Data Tensor&quot;;
+        rdfs:comment     &quot;The datatype for a tensor representing boolean data.&quot;@en;
+        dc:description   &quot;The datatype for a tensor representing boolean data.&quot;@en;
+        skos:definition  &quot;The datatype for a tensor representing boolean data.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+</code></pre>
 
 
 

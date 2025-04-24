@@ -449,6 +449,268 @@
 
 <h1 id="sparql-functions-ontology">SPARQL functions ontology</h1>
 <p>TODO</p>
+<pre><code class="language-ttl">PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt;
+PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+PREFIX dtf: &lt;https://w3id.org/rdf-tensor/functions#&gt;
+PREFIX sd: &lt;http://www.w3.org/ns/sparql-service-description#&gt;
+
+dtf:cos  a               sd:Function;
+        dc:date          &quot;2024-07-28&quot;^^xsd:date;
+        rdfs:label       &quot;Cosine&quot;;
+        rdfs:comment     &quot;Computes the cosine of each element in the numerical tensor.&quot;@en;
+        dc:description   &quot;Computes the cosine of each element in the numerical tensor.&quot;@en;
+        skos:definition  &quot;Computes the cosine of each element in the numerical tensor.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:exp  a               sd:Function;
+        rdfs:label       &quot;Exponential&quot;;
+        rdfs:comment     &quot;Applies the exponential function to each element.&quot;@en;
+        dc:description   &quot;Applies the exponential function to each element.&quot;@en;
+        skos:definition  &quot;Applies the exponential function to each element.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:log  a               sd:Function;
+        rdfs:label       &quot;Natural Logarithm&quot;;
+        rdfs:comment     &quot;Applies the natural logarithm to each element.&quot;@en;
+        dc:description   &quot;Applies the natural logarithm to each element.&quot;@en;
+        skos:definition  &quot;Applies the natural logarithm to each element.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:logp  a              sd:Function;
+        rdfs:label       &quot;Logarithm with Base p&quot;;
+        rdfs:comment     &quot;Applies logarithm with specified base p.&quot;@en;
+        dc:description   &quot;Applies logarithm with specified base p.&quot;@en;
+        skos:definition  &quot;Applies logarithm with specified base p.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:poly  a              sd:Function;
+        rdfs:label       &quot;Polynomial Power&quot;;
+        rdfs:comment     &quot;Raises each element to a specified power.&quot;@en;
+        dc:description   &quot;Raises each element to a specified power.&quot;@en;
+        skos:definition  &quot;Raises each element to a specified power.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:scale  a             sd:Function;
+        rdfs:label       &quot;Scale&quot;;
+        rdfs:comment     &quot;Scales tensor elements by a constant.&quot;@en;
+        dc:description   &quot;Scales tensor elements by a constant.&quot;@en;
+        skos:definition  &quot;Scales tensor elements by a constant.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:sin  a               sd:Function;
+        rdfs:label       &quot;Sine&quot;;
+        rdfs:comment     &quot;Computes the sine of each element in the numerical tensor.&quot;@en;
+        dc:description   &quot;Computes the sine of each element in the numerical tensor.&quot;@en;
+        skos:definition  &quot;Computes the sine of each element in the numerical tensor.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:abs  a               sd:Function;
+        rdfs:label       &quot;Absolute Value&quot;;
+        rdfs:comment     &quot;Applies absolute value to each element.&quot;@en;
+        dc:description   &quot;Applies absolute value to each element.&quot;@en;
+        skos:definition  &quot;Applies absolute value to each element.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:not  a               sd:Function;
+        rdfs:label       &quot;Logical NOT&quot;;
+        rdfs:comment     &quot;Computes the logical negation of each boolean tensor element.&quot;@en;
+        dc:description   &quot;Computes the logical negation of each boolean tensor element.&quot;@en;
+        skos:definition  &quot;Computes the logical negation of each boolean tensor element.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:add  a               sd:Function;
+        rdfs:label       &quot;Addition&quot;;
+        rdfs:comment     &quot;Adds two numerical tensors element-wise.&quot;@en;
+        dc:description   &quot;Adds two numerical tensors element-wise.&quot;@en;
+        skos:definition  &quot;Adds two numerical tensors element-wise.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:subtract  a          sd:Function;
+        rdfs:label       &quot;Subtraction&quot;;
+        rdfs:comment     &quot;Subtracts the second numerical tensor from the first element-wise.&quot;@en;
+        dc:description   &quot;Subtracts the second numerical tensor from the first element-wise.&quot;@en;
+        skos:definition  &quot;Subtracts the second numerical tensor from the first element-wise.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:multiply  a          sd:Function;
+        rdfs:label       &quot;Multiplication&quot;;
+        rdfs:comment     &quot;Multiplies two numerical tensors element-wise.&quot;@en;
+        dc:description   &quot;Multiplies two numerical tensors element-wise.&quot;@en;
+        skos:definition  &quot;Multiplies two numerical tensors element-wise.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:divide  a            sd:Function;
+        rdfs:label       &quot;Division&quot;;
+        rdfs:comment     &quot;Divides the first numerical tensor by the second element-wise.&quot;@en;
+        dc:description   &quot;Divides the first numerical tensor by the second element-wise.&quot;@en;
+        skos:definition  &quot;Divides the first numerical tensor by the second element-wise.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:eq  a                sd:Function;
+        rdfs:label       &quot;Equality Check&quot;;
+        rdfs:comment     &quot;Checks if elements in two tensors are equal.&quot;@en;
+        dc:description   &quot;Checks if elements in two tensors are equal.&quot;@en;
+        skos:definition  &quot;Checks if elements in two tensors are equal.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:neq  a               sd:Function;
+        rdfs:label       &quot;Inequality Check&quot;;
+        rdfs:comment     &quot;Checks if elements in two tensors are not equal.&quot;@en;
+        dc:description   &quot;Checks if elements in two tensors are not equal.&quot;@en;
+        skos:definition  &quot;Checks if elements in two tensors are not equal.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:and  a               sd:Function;
+        rdfs:label       &quot;Logical AND&quot;;
+        rdfs:comment     &quot;Performs element-wise logical AND on boolean tensors.&quot;@en;
+        dc:description   &quot;Performs element-wise logical AND on boolean tensors.&quot;@en;
+        skos:definition  &quot;Performs element-wise logical AND on boolean tensors.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:or  a                sd:Function;
+        rdfs:label       &quot;Logical OR&quot;;
+        rdfs:comment     &quot;Performs element-wise logical OR on boolean tensors.&quot;@en;
+        dc:description   &quot;Performs element-wise logical OR on boolean tensors.&quot;@en;
+        skos:definition  &quot;Performs element-wise logical OR on boolean tensors.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:gt  a                sd:Function;
+        rdfs:label       &quot;Greater Than&quot;;
+        rdfs:comment     &quot;Compares if first tensor is greater than the second element-wise.&quot;@en;
+        dc:description   &quot;Compares if first tensor is greater than the second element-wise.&quot;@en;
+        skos:definition  &quot;Compares if first tensor is greater than the second element-wise.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:lt  a                sd:Function;
+        rdfs:label       &quot;Less Than&quot;;
+        rdfs:comment     &quot;Compares if first tensor is less than the second element-wise.&quot;@en;
+        dc:description   &quot;Compares if first tensor is less than the second element-wise.&quot;@en;
+        skos:definition  &quot;Compares if first tensor is less than the second element-wise.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:getSubDT  a          sd:Function;
+        rdfs:label       &quot;Get Sub-Tensor&quot;;
+        rdfs:comment     &quot;Extracts a sub-tensor based on an index or mask tensor.&quot;@en;
+        dc:description   &quot;Extracts a sub-tensor based on an index or mask tensor.&quot;@en;
+        skos:definition  &quot;Extracts a sub-tensor based on an index or mask tensor.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:concat  a            sd:Function;
+        rdfs:label       &quot;Concatenate Tensors&quot;;
+        rdfs:comment     &quot;Concatenates two tensors optionally along a specified dimension.&quot;@en;
+        dc:description   &quot;Concatenates two tensors optionally along a specified dimension.&quot;@en;
+        skos:definition  &quot;Concatenates two tensors optionally along a specified dimension.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:hstack  a            sd:Function;
+        rdfs:label       &quot;Horizontal Stack&quot;;
+        rdfs:comment     &quot;Stacks two tensors horizontally (along axis 1).&quot;@en;
+        dc:description   &quot;Stacks two tensors horizontally (along axis 1).&quot;@en;
+        skos:definition  &quot;Stacks two tensors horizontally (along axis 1).&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:vstack  a            sd:Function;
+        rdfs:label       &quot;Vertical Stack&quot;;
+        rdfs:comment     &quot;Stacks two tensors vertically (along axis 0).&quot;@en;
+        dc:description   &quot;Stacks two tensors vertically (along axis 0).&quot;@en;
+        skos:definition  &quot;Stacks two tensors vertically (along axis 0).&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:all  a               sd:Function;
+        rdfs:label       &quot;All True&quot;;
+        rdfs:comment     &quot;Checks whether all elements in a boolean tensor are true.&quot;@en;
+        dc:description   &quot;Checks whether all elements in a boolean tensor are true.&quot;@en;
+        skos:definition  &quot;Checks whether all elements in a boolean tensor are true.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:any  a               sd:Function;
+        rdfs:label       &quot;Any True&quot;;
+        rdfs:comment     &quot;Checks whether any element in a boolean tensor is true.&quot;@en;
+        dc:description   &quot;Checks whether any element in a boolean tensor is true.&quot;@en;
+        skos:definition  &quot;Checks whether any element in a boolean tensor is true.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:avg  a               sd:Function;
+        rdfs:label       &quot;Average&quot;;
+        rdfs:comment     &quot;Computes the average along a specified axis.&quot;@en;
+        dc:description   &quot;Computes the average along a specified axis.&quot;@en;
+        skos:definition  &quot;Computes the average along a specified axis.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:sum  a               sd:Function;
+        rdfs:label       &quot;Sum&quot;;
+        rdfs:comment     &quot;Computes the sum along a specified axis.&quot;@en;
+        dc:description   &quot;Computes the sum along a specified axis.&quot;@en;
+        skos:definition  &quot;Computes the sum along a specified axis.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:max  a               sd:Function;
+        rdfs:label       &quot;Maximum&quot;;
+        rdfs:comment     &quot;Computes the maximum along a specified axis.&quot;@en;
+        dc:description   &quot;Computes the maximum along a specified axis.&quot;@en;
+        skos:definition  &quot;Computes the maximum along a specified axis.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:median  a            sd:Function;
+        rdfs:label       &quot;Median&quot;;
+        rdfs:comment     &quot;Computes the median along a specified axis.&quot;@en;
+        dc:description   &quot;Computes the median along a specified axis.&quot;@en;
+        skos:definition  &quot;Computes the median along a specified axis.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:min  a               sd:Function;
+        rdfs:label       &quot;Minimum&quot;;
+        rdfs:comment     &quot;Computes the minimum along a specified axis.&quot;@en;
+        dc:description   &quot;Computes the minimum along a specified axis.&quot;@en;
+        skos:definition  &quot;Computes the minimum along a specified axis.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:std  a               sd:Function;
+        rdfs:label       &quot;Standard Deviation&quot;;
+        rdfs:comment     &quot;Computes the standard deviation along a specified axis.&quot;@en;
+        dc:description   &quot;Computes the standard deviation along a specified axis.&quot;@en;
+        skos:definition  &quot;Computes the standard deviation along a specified axis.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:var  a               sd:Function;
+        rdfs:label       &quot;Variance&quot;;
+        rdfs:comment     &quot;Computes the variance along a specified axis.&quot;@en;
+        dc:description   &quot;Computes the variance along a specified axis.&quot;@en;
+        skos:definition  &quot;Computes the variance along a specified axis.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:norm1  a             sd:Function;
+        rdfs:label       &quot;L1 Norm&quot;;
+        rdfs:comment     &quot;Computes the L1 norm along a specified axis.&quot;@en;
+        dc:description   &quot;Computes the L1 norm along a specified axis.&quot;@en;
+        skos:definition  &quot;Computes the L1 norm along a specified axis.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:norm2  a             sd:Function;
+        rdfs:label       &quot;L2 Norm&quot;;
+        rdfs:comment     &quot;Computes the L2 norm along a specified axis.&quot;@en;
+        dc:description   &quot;Computes the L2 norm along a specified axis.&quot;@en;
+        skos:definition  &quot;Computes the L2 norm along a specified axis.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:cosineSimilarity  a  sd:Function;
+        rdfs:label       &quot;Cosine Similarity&quot;;
+        rdfs:comment     &quot;Computes the cosine similarity between two numerical tensors.&quot;@en;
+        dc:description   &quot;Computes the cosine similarity between two numerical tensors.&quot;@en;
+        skos:definition  &quot;Computes the cosine similarity between two numerical tensors.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+dtf:euclideanDistance
+        a                sd:Function;
+        rdfs:label       &quot;Euclidean Distance&quot;;
+        rdfs:comment     &quot;Computes the Euclidean distance between two numerical tensors.&quot;@en;
+        dc:description   &quot;Computes the Euclidean distance between two numerical tensors.&quot;@en;
+        skos:definition  &quot;Computes the Euclidean distance between two numerical tensors.&quot;@en;
+        dc:creator       &quot;Piotr Marciniak&quot; .
+
+</code></pre>
 
 
 
