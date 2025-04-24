@@ -41,3 +41,6 @@ build/
 ### My personal preferences ###
 /src/main/java/org/nd4j/
 /src/main/java/DTMain.java
+
+### Python ###
+/venv/
