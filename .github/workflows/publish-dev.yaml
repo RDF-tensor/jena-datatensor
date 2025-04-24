@@ -31,10 +31,10 @@ jobs:
           chmod +x /opt/jelly-cli
           echo '/opt' >> $GITHUB_PATH
 
-      - name: 'TODO: convert ontologies, prepare for publishing'
+      - name: 'Convert ontologies, prepare for publishing'
         run: |
-          jelly-cli version
-          ls -l # TODO
+          bin/build_ontology.sh
+          cp publish/*.ttl docs/ontology/files/
 
       - name: Deploy site
         run: |

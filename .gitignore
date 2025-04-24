@@ -44,3 +44,6 @@ build/
 
 ### Python ###
 /venv/
+
+### Files for publishing ###
+/publish

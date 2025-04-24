@@ -1,5 +1,10 @@
 site_name: Data tensors in RDF
 site_url: https://rdf-tensor.github.io/jena-datatensor/
+
+plugins:
+  - search
+  - include-markdown
+
 theme:
   name: material
   features:
