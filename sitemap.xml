@@ -16,4 +16,8 @@
          <loc>https://rdf-tensor.github.io/jena-datatensor/ontology/functions/</loc>
          <lastmod>2025-04-24</lastmod>
     </url>
+    <url>
+         <loc>https://rdf-tensor.github.io/jena-datatensor/ontology/files/</loc>
+         <lastmod>2025-04-24</lastmod>
+    </url>
 </urlset>
