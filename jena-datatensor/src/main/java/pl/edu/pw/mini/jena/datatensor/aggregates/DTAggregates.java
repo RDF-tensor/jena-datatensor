@@ -5,7 +5,6 @@ import org.apache.jena.sparql.expr.aggregate.AggregateRegistry;
 import pl.edu.pw.mini.jena.datatensor.vocabulary.AggregatesDT;
 
 public class DTAggregates {
-    public static final String BASE = "http://example.org/datatensor/functions/aggregates#";
 
     public static void register() {
         AccumulatorFactory f_avg = (agg, distinct) -> new AccAvgDT(agg.getExpr(), false);
