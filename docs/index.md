@@ -1,45 +1,112 @@
 # Data tensors in RDF
 
-This is a proposed extension to RDF and SPARQL that introduces 2 new datatypes, 36 SPARQL functions, and 6 new aggregates to enhance the processing of data tensors within RDF models. A data tensor is a multi-dimensional array of values, which can be numeric or boolean, commonly used for example in machine learning embeddings.
+**Unofficial Draft**  
+*Date: May 11, 2025*
 
-## General information
+**Editors:** <br> 
+&nbsp;Piotr Sowiński<br>
+&nbsp;Piotr Marciniak
 
-The proposed approach is described in an ESWC 2025 poster, that will be posted soon as a preprint.
+---
 
-It was implemented in Apache Jena – **[see the installation instructions on GitHub](https://github.com/RDF-tensor/jena-datatensor)**.
+## Abstract
 
-Ontology files for the new datatypes, functions, and aggregates are available. See:
+This specification introduces two new RDF datatypes—`dt:NumericDataTensor` and `dt:BooleanDataTensor`—to represent multi-dimensional arrays (tensors) within RDF and extension of the SPARQL language.
+This extension includes 36 functions and 6 aggregates, enabling the efficient processing of tensor data within RDF frameworks.
 
-- [Datatypes](ontology/datatypes.md)
-- [Functions](ontology/functions.md)
-- [Aggregates](ontology/aggregates.md)
+## Status of This Document
 
-### Example dataset and queries
+This document is a draft and does not represent an official standard. It is intended for discussion and feedback within the community.
 
-See an [example dataset and queries on GitHub](https://github.com/RDF-tensor/jena-datatensor/tree/main/example_dataset_and_queries).
+## 1. Introduction
 
-### Authors
+### 1.1. Background and Motivation
 
-The extension design and the implementation in Jena were done by **[Piotr Marciniak](https://github.com/cinekele)**. The website and parts of the documentation were done by **[Piotr Sowiński](https://github.com/Ostrzyciel)**.
+*This section is non-normative.*
 
-The contents of this website are licensed under [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+The growing use of machine learning, particularly language models, demands native support for high-dimensional tensors in RDF and SPARQL. 
+Current methods (e.g., RDF collections or reification) are verbose and computationally inefficient. 
+This specification provides a compact, performant way to work with numeric and boolean tensors in RDF graphs.
 
-## Features
+### 1.2. Structure of the Document
 
-- **2 new datatypes:**
-    - `dt:NumericDataTensor` – Designed for storing tensors containing numeric values.
-    - `dt:BooleanDataTensor` – Intended for storing tensors containing boolean values.
-- **36 new SPARQL functions:**
-    - Tensor manipulations (addition, multiplication, reshaping, etc.)
-    - Algebraic computations
-- **6 new aggregates:**
-    - Generalized aggregation functions for numerical tensors
-    - Sum, average, variance, and standard deviation computations
+*This section is non-normative.*
 
-## Implemented Functions
+This document starts by describing the informal motivation and structure of the proposed extensions. It then defines the two new RDF datatypes for tensors, followed by SPARQL function extensions and their semantics. It concludes with usage examples, implementation guidance, and appendices.
 
-The table below lists the implemented SPARQL functions, including their input arguments, return values, and associated IRI (with the `dtf` prefix set to `https://w3id.org/rdf-tensor/functions#`).
+### 1.3 Document Conventions
 
+*This section is non-normative.*
+
+Examples in this document assume that the following prefixes have been declared to represent the IRIs shown with them here:
+
+**Prefixes used:**
+
+| Prefix | Namespace                                   |
+|--------|---------------------------------------------|
+| `ex`  | `http://example.org/data-tensor#`           |
+| `dt`  | `https://w3id.org/rdf-tensor/datatypes#`    |
+| `dtf` | `https://w3id.org/rdf-tensor/functions#`    |
+| `dta` | `https://w3id.org/rdf-tensor/aggregates#`   |
+
+
+## 2. The `dt:NumericDataTensor` Datatype
+### IRI
+https://w3id.org/rdf-tensor/datatypes#NumericDataTensor
+
+### Definition
+
+Represents a multi-dimensional array (tensor) of numeric values, encoded in JSON. This datatype explicitly captures the tensor’s shape, numeric type, and flat data values in row-major order.
+
+### Lexical Space
+
+A valid [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259) JSON object **with the following structure**:
+
+| Key     | Type                | Description                                                                                                  |
+|---------|---------------------|--------------------------------------------------------------------------------------------------------------|
+| `type`  | `string`            | Must be one of: `float16`, `float32`, `float64`, `int16`, `int32`, `int64`. Defines the type of numbers.     |
+| `shape` | `array of integers` | Specifies the size of each dimension. The product of the integers must equal the length of the `data` array. |
+| `data`  | `array of numbers`  | A flat array of numbers in row-major (C-style) order. Numbers must use decimal or exponential notation.      |
+
+### Value Space
+
+An n-dimensional numeric tensor, where $n$ is the length of shape array.
+
+### Examples
+
+#### Lexical Form
+
+```turtle
+ex:x  ex:hasValue "{\"type\": \"float32\", \"shape\": [3, 3],\"data\": [1.2, 3.5, 5.3, 0.1, 1.2, 2.2, 3.2, 4.1, 5.4]}"^^dt:NumericDataTensor .
+```
+
+## 3. The `dt:BooleanDataTensor` Datatype
+
+
+### Definition
+
+Represents a multi-dimensional array (tensor) of boolean values, encoded in JSON. This datatype captures the tensor’s shape and values, with elements stored in row-major (C-style) order. It is useful for expressing structured boolean data in a self-descriptive and human-readable format.
+
+### Lexical Space
+
+A valid [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259) JSON object **with the following structure**:
+
+| Key     | Type                | Description                                                                                                  |
+|---------|---------------------|--------------------------------------------------------------------------------------------------------------|
+| `shape` | `array of integers` | Specifies the size of each dimension. The product of the integers must equal the length of the `data` array. |
+| `data`  | `array of booleans` | A flat array of boolean values (`true` or `false`), stored in row-major (C-style) order.                     |
+
+### Value Space
+
+An n-dimensional boolean tensor, where $n$ is the length of shape array. 
+
+### Example
+
+```turtle
+ex:y  ex:hasValue "{\"shape\": [2, 2], \"data\": [true, false, false, true]}"^^dt:BooleanDataTensor .
+```
+
+## 4. SPARQL Functions
 ### Transforming Functions
 
 | **IRI** | **Function** | **Input Arguments** | **Return Value** |
@@ -107,10 +174,7 @@ The table below lists the implemented SPARQL functions, including their input ar
 | `dtf:euclideanDistance` | Computes Euclidean distance | Two numerical tensors | Numeric scalar |
 
 
-## Implemented Aggregates
-
-The table below lists the implemented aggregation functions, which operate on `NumericDataTensor` inputs and return `NumericDataTensor` results. These aggregates generalize standard aggregation functions for numerical tensors and do not support the `DISTINCT` keyword.
-The `dta` prefix set to `https://w3id.org/rdf-tensor/aggregates#`)
+## 5. SPARQL Aggregates
 
 | **IRI (with Turtle prefix)** | **Description**                        |
 | -----------------------------|----------------------------------------|
@@ -118,3 +182,10 @@ The `dta` prefix set to `https://w3id.org/rdf-tensor/aggregates#`)
 | **dta:avg**                  | Calculates an average tensor           |
 | **dta:var**                  | Computes the variance tensor           |
 | **dta:std**                  | Computes the standard deviation tensor |
+
+[//]: # (## C. References)
+
+[//]: # (### C.1. Normative References)
+
+[//]: # ()
+[//]: # (### C.2. Non-Normative References)
