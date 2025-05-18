@@ -11,7 +11,8 @@
 
 ## Abstract
 
-This specification introduces two new RDF datatypes—`dt:NumericDataTensor` and `dt:BooleanDataTensor`—to represent multi-dimensional arrays (tensors) within RDF and extension of the SPARQL language.
+This specification defines an approach to represent data tensors (multi-dimensional arrays) as literals in RDF.
+It introduces two new RDF datatypes—`dt:NumericDataTensor` and `dt:BooleanDataTensor` and extension of the SPARQL language.
 This extension includes 36 functions and 6 aggregates, enabling the efficient processing of tensor data within RDF frameworks.
 
 ## Status of This Document
@@ -20,21 +21,7 @@ This document is a draft and does not represent an official standard. It is inte
 
 ## 1. Introduction
 
-### 1.1. Background and Motivation
-
-*This section is non-normative.*
-
-The growing use of machine learning, particularly language models, demands native support for high-dimensional tensors in RDF and SPARQL. 
-Current methods (e.g., RDF collections or reification) are verbose and computationally inefficient. 
-This specification provides a compact, performant way to work with numeric and boolean tensors in RDF graphs.
-
-### 1.2. Structure of the Document
-
-*This section is non-normative.*
-
-This document starts by describing the informal motivation and structure of the proposed extensions. It then defines the two new RDF datatypes for tensors, followed by SPARQL function extensions and their semantics. It concludes with usage examples, implementation guidance, and appendices.
-
-### 1.3 Document Conventions
+### 1.1 Document Conventions
 
 *This section is non-normative.*
 
@@ -77,7 +64,7 @@ An n-dimensional numeric tensor, where $n$ is the length of shape array.
 #### Lexical Form
 
 ```turtle
-ex:x  ex:hasValue "{\"type\": \"float32\", \"shape\": [3, 3],\"data\": [1.2, 3.5, 5.3, 0.1, 1.2, 2.2, 3.2, 4.1, 5.4]}"^^dt:NumericDataTensor .
+ex:x  ex:hasValue "{\"type\": \"float32\", \"shape\": [3, 2],\"data\": [0.1, 1.2, 2.2, 3.2, 4.1, 5.4e2]}"^^dt:NumericDataTensor .
 ```
 
 ## 3. The `dt:BooleanDataTensor` Datatype
