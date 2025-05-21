@@ -801,28 +801,24 @@ The following aggregation functions are implemented as SPARQL extension aggregat
 - **Description:** Sums grouped numeric tensors element-wise.
 - **Input:** A group of `NumericDataTensor` values.
 - **Output:** A `NumericDataTensor` representing the element-wise sum of all tensors in the group.
-- **Supports DISTINCT:** No
 
 ### `dta:avg`
 - **IRI:** `http://example.org/data-tensor/aggregators#avg`
 - **Description:** Computes the element-wise average of grouped tensors.
 - **Input:** A group of `NumericDataTensor` values.
 - **Output:** A `NumericDataTensor` representing the average tensor.
-- **Supports DISTINCT:** No
 
 ### `dta:var`
 - **IRI:** `http://example.org/data-tensor/aggregators#var`
 - **Description:** Calculates the element-wise variance across grouped tensors.
 - **Input:** A group of `NumericDataTensor` values.
 - **Output:** A `NumericDataTensor` representing the variance tensor.
-- **Supports DISTINCT:** No
 
 ### `dta:std`
 - **IRI:** `http://example.org/data-tensor/aggregators#std`
 - **Description:** Computes the element-wise standard deviation across grouped tensors.
 - **Input:** A group of `NumericDataTensor` values.
 - **Output:** A `NumericDataTensor` representing the standard deviation tensor.
-- **Supports DISTINCT:** No
 
 ## A. References
 
