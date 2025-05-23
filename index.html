@@ -1569,6 +1569,48 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="5. SPARQL Aggregates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dtasum" class="md-nav__link">
+    <span class="md-ellipsis">
+      dta:sum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dtaavg" class="md-nav__link">
+    <span class="md-ellipsis">
+      dta:avg
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dtavar" class="md-nav__link">
+    <span class="md-ellipsis">
+      dta:var
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dtastd" class="md-nav__link">
+    <span class="md-ellipsis">
+      dta:std
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3117,6 +3159,48 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="5. SPARQL Aggregates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dtasum" class="md-nav__link">
+    <span class="md-ellipsis">
+      dta:sum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dtaavg" class="md-nav__link">
+    <span class="md-ellipsis">
+      dta:avg
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dtavar" class="md-nav__link">
+    <span class="md-ellipsis">
+      dta:var
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dtastd" class="md-nav__link">
+    <span class="md-ellipsis">
+      dta:std
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3758,32 +3842,35 @@ returns
 </span></code></pre></div></p>
 <hr />
 <h2 id="5-sparql-aggregates">5. SPARQL Aggregates</h2>
-<table>
-<thead>
-<tr>
-<th><strong>IRI (with Turtle prefix)</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>dta:sum</strong></td>
-<td>Sums grouped tensors</td>
-</tr>
-<tr>
-<td><strong>dta:avg</strong></td>
-<td>Calculates an average tensor</td>
-</tr>
-<tr>
-<td><strong>dta:var</strong></td>
-<td>Computes the variance tensor</td>
-</tr>
-<tr>
-<td><strong>dta:std</strong></td>
-<td>Computes the standard deviation tensor</td>
-</tr>
-</tbody>
-</table>
+<p>The following aggregation functions are implemented as SPARQL extension aggregates. Each function operates over NumericDataTensor values and returns a NumericDataTensor with the most precise type used within each group. These functions do not support the DISTINCT modifier.</p>
+<h3 id="dtasum"><code>dta:sum</code></h3>
+<ul>
+<li><strong>IRI:</strong> <code>http://example.org/data-tensor/aggregators#sum</code></li>
+<li><strong>Description:</strong> Sums grouped numeric tensors element-wise.</li>
+<li><strong>Input:</strong> A group of <code>NumericDataTensor</code> values.</li>
+<li><strong>Output:</strong> A <code>NumericDataTensor</code> representing the element-wise sum of all tensors in the group.</li>
+</ul>
+<h3 id="dtaavg"><code>dta:avg</code></h3>
+<ul>
+<li><strong>IRI:</strong> <code>http://example.org/data-tensor/aggregators#avg</code></li>
+<li><strong>Description:</strong> Computes the element-wise average of grouped tensors.</li>
+<li><strong>Input:</strong> A group of <code>NumericDataTensor</code> values.</li>
+<li><strong>Output:</strong> A <code>NumericDataTensor</code> representing the average tensor.</li>
+</ul>
+<h3 id="dtavar"><code>dta:var</code></h3>
+<ul>
+<li><strong>IRI:</strong> <code>http://example.org/data-tensor/aggregators#var</code></li>
+<li><strong>Description:</strong> Calculates the element-wise variance across grouped tensors.</li>
+<li><strong>Input:</strong> A group of <code>NumericDataTensor</code> values.</li>
+<li><strong>Output:</strong> A <code>NumericDataTensor</code> representing the variance tensor.</li>
+</ul>
+<h3 id="dtastd"><code>dta:std</code></h3>
+<ul>
+<li><strong>IRI:</strong> <code>http://example.org/data-tensor/aggregators#std</code></li>
+<li><strong>Description:</strong> Computes the element-wise standard deviation across grouped tensors.</li>
+<li><strong>Input:</strong> A group of <code>NumericDataTensor</code> values.</li>
+<li><strong>Output:</strong> A <code>NumericDataTensor</code> representing the standard deviation tensor.</li>
+</ul>
 <h2 id="a-references">A. References</h2>
 <h3 id="a1-informative-references">A.1. Informative references</h3>
 <p><strong>[rdf11-concepts]</strong></p>
