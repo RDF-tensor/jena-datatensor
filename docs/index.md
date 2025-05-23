@@ -958,8 +958,9 @@ returns
 
 ---
 
-#### dtf:max
+#### `dtf:max`
 [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:max** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
+
 [xsd:double](http://www.w3.org/2001/XMLSchema#double) **dtf:max** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
 
 This function computes the maximum along the specified axis. If the axis is negative, the maximum is calculated over the entire tensor. It returns a reduced tensor or a scalar.
@@ -985,8 +986,9 @@ returns
 
 ---
 
-#### dtf:median
+#### `dtf:median`
 [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:median** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
+
 [xsd:double](http://www.w3.org/2001/XMLSchema#double) **dtf:median** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
 
 This function computes the median along the specified axis. If the axis is negative, the median is calculated over the entire tensor. It returns a reduced tensor or a scalar.
@@ -1012,8 +1014,9 @@ returns
 
 ---
 
-#### dtf:min
+#### `dtf:min`
 [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:min** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
+
 [xsd:double](http://www.w3.org/2001/XMLSchema#double) **dtf:min** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
 
 This function computes the minimum along the specified axis. If the axis is negative, the minimum is calculated over the entire tensor. It returns a reduced tensor or a scalar.
@@ -1039,8 +1042,9 @@ returns
 
 ---
 
-#### dtf:std
+#### `dtf:std`
 [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:std** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
+
 [xsd:double](http://www.w3.org/2001/XMLSchema#double) **dtf:std** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
 
 This function computes the standard deviation along the specified axis. If the axis is negative, the standard deviation is calculated over the entire tensor. It returns a reduced tensor or a scalar.
@@ -1066,8 +1070,9 @@ returns
 
 ---
 
-#### dtf:var
+#### `dtf:var`
 [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:var** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
+
 [xsd:double](http://www.w3.org/2001/XMLSchema#double) **dtf:var** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
 
 This function computes the variance along the specified axis. If the axis is negative, the variance is calculated over the entire tensor. It returns a reduced tensor or a scalar.
@@ -1093,8 +1098,9 @@ returns
 
 ---
 
-#### dtf:norm1
+#### `dtf:norm1`
 [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:norm1** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
+
 [xsd:double](http://www.w3.org/2001/XMLSchema#double) **dtf:norm1** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
 
 This function computes the L1 norm (sum of absolute values) along the specified axis. If the axis is negative, the L1 norm (sum of absolute values) is calculated over the entire tensor. It returns a reduced tensor or a scalar.
@@ -1120,8 +1126,9 @@ returns
 
 ---
 
-#### dtf:norm2
+#### `dtf:norm2`
 [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:norm2** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
+
 [xsd:double](http://www.w3.org/2001/XMLSchema#double) **dtf:norm1** ([xsd:integer](http://www.w3.org/2001/XMLSchema#integer) *axis*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
 
 This function computes the L2 norm (Euclidean norm) along the specified axis. If the axis is negative, the L2 norm (Euclidean norm) is calculated over the entire tensor. It returns a reduced tensor or a scalar.
@@ -1148,7 +1155,7 @@ returns
 
 ### 4.6. Similarity Functions
 
-#### dtf:cosineSimilarity
+#### `dtf:cosineSimilarity`
 [xsd:double](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:cosineSimilarity** ([dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_2*)
 
 This function computes the cosine similarity between two numerical tensors. Returns a numeric scalar value.
@@ -1174,7 +1181,7 @@ returns
 
 ---
 
-#### dtf:euclideanDistance
+#### `dtf:euclideanDistance`
 [xsd:double](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:euclideanDistance** ([dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_2*)
 
 This function computes the Euclidean distance between two numerical tensors. Returns a numeric scalar value.
@@ -1186,7 +1193,7 @@ This function computes the Euclidean distance between two numerical tensors. Ret
 Evaluating the SPARQL expression
 
 ```sparql
-dtf:euclideanDistance(  "{\"type\": \"float32\", \"shape\": [2], \"data\": [3, 4]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [2], \"data\": [0, 0]}"^^dt:NumericDataTensor)
+dtf:euclideanDistance("{\"type\": \"float32\", \"shape\": [2], \"data\": [3, 4]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [2], \"data\": [0, 0]}"^^dt:NumericDataTensor)
 ```
 
 returns
