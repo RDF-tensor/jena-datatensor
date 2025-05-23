@@ -794,12 +794,31 @@ returns
 
 ## 5. SPARQL Aggregates
 
-| **IRI (with Turtle prefix)** | **Description**                        |
-| -----------------------------|----------------------------------------|
-| **dta:sum**                  | Sums grouped tensors                   |
-| **dta:avg**                  | Calculates an average tensor           |
-| **dta:var**                  | Computes the variance tensor           |
-| **dta:std**                  | Computes the standard deviation tensor |
+The following aggregation functions are implemented as SPARQL extension aggregates. Each function operates over NumericDataTensor values and returns a NumericDataTensor with the most precise type used within each group. These functions do not support the DISTINCT modifier.
+
+### `dta:sum`
+- **IRI:** `http://example.org/data-tensor/aggregators#sum`
+- **Description:** Sums grouped numeric tensors element-wise.
+- **Input:** A group of `NumericDataTensor` values.
+- **Output:** A `NumericDataTensor` representing the element-wise sum of all tensors in the group.
+
+### `dta:avg`
+- **IRI:** `http://example.org/data-tensor/aggregators#avg`
+- **Description:** Computes the element-wise average of grouped tensors.
+- **Input:** A group of `NumericDataTensor` values.
+- **Output:** A `NumericDataTensor` representing the average tensor.
+
+### `dta:var`
+- **IRI:** `http://example.org/data-tensor/aggregators#var`
+- **Description:** Calculates the element-wise variance across grouped tensors.
+- **Input:** A group of `NumericDataTensor` values.
+- **Output:** A `NumericDataTensor` representing the variance tensor.
+
+### `dta:std`
+- **IRI:** `http://example.org/data-tensor/aggregators#std`
+- **Description:** Computes the element-wise standard deviation across grouped tensors.
+- **Input:** A group of `NumericDataTensor` values.
+- **Output:** A `NumericDataTensor` representing the standard deviation tensor.
 
 ## A. References
 
