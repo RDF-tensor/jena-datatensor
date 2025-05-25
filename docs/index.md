@@ -1,23 +1,25 @@
 # Data tensors in RDF
 
 **Unofficial Draft**  
-*Date: May 11, 2025*
+*Date: May 25, 2025*
 
 **Editors:** <br> 
-&nbsp;Piotr Sowiński<br>
-&nbsp;Piotr Marciniak
+&nbsp;Piotr Marciniak<br>
+&nbsp;[Piotr Sowiński](https://ostrzyciel.eu)
 
 ---
 
 ## Abstract
 
 This specification defines an approach to represent data tensors (multi-dimensional arrays) as literals in RDF.
-It introduces two new RDF datatypes—`dt:NumericDataTensor` and `dt:BooleanDataTensor` and extension of the SPARQL language.
+It introduces two new RDF datatypes – `dt:NumericDataTensor` and `dt:BooleanDataTensor`, along with an extension of the SPARQL language.
 This extension includes 36 functions and 6 aggregates, enabling the efficient processing of tensor data within RDF frameworks.
+
+**[See our paper for more information](https://arxiv.org/abs/2504.19224)**
 
 ## Status of This Document
 
-This document is a draft and does not represent an official standard. It is intended for discussion and feedback within the community.
+This document is a draft and does not represent an official standard. It is intended for discussion and gathering feedback within the community.
 
 ## 1. Introduction
 
@@ -40,7 +42,8 @@ Examples in this document assume that the following prefixes have been declared 
 
 ## 2. The `dt:NumericDataTensor` Datatype
 ### IRI
-https://w3id.org/rdf-tensor/datatypes#NumericDataTensor
+
+[`https://w3id.org/rdf-tensor/datatypes#NumericDataTensor`](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor)
 
 ### Definition
 
@@ -69,17 +72,18 @@ The `shape` key is used to determine the dimensions of the tensor, the `data` ke
 the `type` key is used to efficiently choose the number of bytes for storing numbers and set precision. 
 After parsing, the JSON object is converted into a tensor structure.
 
-### Examples
+!!! example
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [3, 2], \"data\": [0.1, 1.2, 2.2, 3.2, 4.1, 5.4e2]}"^^dt:NumericDataTensor
-"{\"type\": \"int32\", \"shape\": [1, 2, 2, 2], \"data\": [1, 3, 4, 12, 22, 32, 41, 5]}"^^dt:NumericDataTensor
-```
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [3, 2], \"data\": [0.1, 1.2, 2.2, 3.2, 4.1, 5.4e2]}"^^dt:NumericDataTensor
+    "{\"type\": \"int32\", \"shape\": [1, 2, 2, 2], \"data\": [1, 3, 4, 12, 22, 32, 41, 5]}"^^dt:NumericDataTensor
+    ```
 
 ## 3. The `dt:BooleanDataTensor` Datatype
 
 ### IRI
-https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor
+
+[`https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor`](https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor)
 
 ### Definition
 
@@ -106,39 +110,35 @@ The lexical representation is parsed as a JSON object.
 The `shape` key is used to determine the dimensions of the tensor, and the `data` key contains the boolean values.
 After parsing, the JSON object is converted into a tensor structure.
 
-### Examples
+!!! example
 
-```turtle
-"{\"shape\": [2, 2], \"data\": [true, false, false, true]}"^^dt:BooleanDataTensor .
-"{\"shape\": [2, 2, 2], \"data\": [true, false, false, true, false, false, false, true]}"^^dt:BooleanDataTensor .
-```
+    ```turtle
+    "{\"shape\": [2, 2], \"data\": [true, false, false, true]}"^^dt:BooleanDataTensor .
+    "{\"shape\": [2, 2, 2], \"data\": [true, false, false, true, false, false, false, true]}"^^dt:BooleanDataTensor .
+    ```
 
 ## 4. SPARQL Functions
 ### 4.1. Transforming Functions
 
 #### `dtf:cos`
+
 [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:cos** ([dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*)
 
 The result of the function is a tensor of the same shape as the input tensor, where each element is replaced by its cosine value.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-   dtf:cos("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [0, 3.1415]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:cos("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [0, 3.1415]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, -1]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, -1]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -147,24 +147,19 @@ returns
 
 The result of the function is a tensor of the same shape as the input tensor, where each element is replaced by its exponential value.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:exp("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [0, 1]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:exp("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [0, 1]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 2.7183]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 2.7183]}"^^dt:NumericDataTensor
+    ```
 
 
 ---
@@ -174,24 +169,19 @@ returns
 
 The result of the function is a tensor of the same shape as the input tensor, where each element is replaced by its natural logarithm value.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:log("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 2.7183]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:log("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 2.7183]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [0, 1]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [0, 1]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -200,24 +190,19 @@ returns
 
 The result is a tensor of the same shape, where each element is replaced by its logarithm with base *p*.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:logp(10, "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 10]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:logp(10, "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 10]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [0, 1]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [0, 1]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -226,24 +211,19 @@ returns
 
 The result is a tensor where each element is raised to the power *n*.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:poly(2, "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [2, 3]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:poly(2, "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [2, 3]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [4, 9]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [4, 9]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -252,24 +232,19 @@ returns
 
 The result is a tensor of the same shape, where each element is multiplied by the given scalar factor.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:scale(3, "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [2, 3]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:scale(3, "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [2, 3]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [6, 9]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [6, 9]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -278,24 +253,19 @@ returns
 
 The result of the function is a tensor of the same shape as the input tensor, where each element is replaced by its sine value.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:sin("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [0, 3.1415]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:sin("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [0, 3.1415]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [0, 0]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [0, 0]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -304,24 +274,19 @@ returns
 
 The result of the function is a tensor of the same shape as the input tensor, where each element is replaced by its absolute value.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:abs("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [-1, 2]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:abs("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [-1, 2]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 2]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 2]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -334,24 +299,19 @@ When using the binary operators, the input tensors are broadcasted to a common s
 
 The result of the function is a tensor of the same shape as the input tensor, where each element is logically negated.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:not("{\"type\": \"bool\", \"shape\": [1, 2], \"data\": [true, false]}"^^dt:BooleanDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:not("{\"type\": \"bool\", \"shape\": [1, 2], \"data\": [true, false]}"^^dt:BooleanDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"bool\", \"shape\": [1, 2], \"data\": [false, true]}"^^dt:BooleanDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"bool\", \"shape\": [1, 2], \"data\": [false, true]}"^^dt:BooleanDataTensor
+    ```
 
 ---
 
@@ -360,44 +320,34 @@ returns
 
 The result of the function is a tensor of broadcasted shape, where each element is the sum of corresponding elements in the input tensors.
 
-<table>
-<thead><tr><th>Example 1</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example "Example 1"
 
-```sparql
-dtf:add("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 2]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [3, 4]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:add("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 2]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [3, 4]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [4, 6]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [4, 6]}"^^dt:NumericDataTensor
+    ```
 
 
-<table>
-<thead><tr><th>Example 2</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example "Example 2"
 
-```sparql
-dtf:add("{\"type\":\"float32\",\"shape\":[1, 2, 2], \"data\":[3, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[1],\"data\":[1, 2]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:add("{\"type\":\"float32\",\"shape\":[1, 2, 2], \"data\":[3, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[1],\"data\":[1, 2]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1, 2, 2], \"data\": [4, 4, 4, 6]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1, 2, 2], \"data\": [4, 4, 4, 6]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -407,44 +357,34 @@ returns
 The result of the function is a tensor of broadcasted shape, where each element is the difference between corresponding elements in the input tensors.
 
 
-<table>
-<thead><tr><th>Example 1</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example "Example 1"
 
-```sparql
-dtf:subtract("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [5, 7]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [2, 3]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:subtract("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [5, 7]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [2, 3]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [3, 4]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [3, 4]}"^^dt:NumericDataTensor
+    ```
 
 
-<table>
-<thead><tr><th>Example 2</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example "Example 2"
 
-```sparql
-dtf:subtract("{\"type\":\"float32\",\"shape\":[2, 2], \"data\":[3, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[2],\"data\":[2, 1]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:subtract("{\"type\":\"float32\",\"shape\":[2, 2], \"data\":[3, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[2],\"data\":[2, 1]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [1, 1, 1, 3]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [1, 1, 1, 3]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -453,44 +393,34 @@ returns
 
 The result of the function is a tensor of broadcasted shape, where each element is the product of corresponding elements in the input tensors.
 
-<table>
-<thead><tr><th>Example 1</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example "Example 1"
 
-```sparql
-dtf:multiply("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [2, 3]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [4, 5]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:multiply("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [2, 3]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [4, 5]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [8, 15]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [8, 15]}"^^dt:NumericDataTensor
+    ```
 
 
-<table>
-<thead><tr><th>Example 2</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example "Example 2"
 
-```sparql
-dtf:multiply("{\"type\":\"int32\",\"shape\":[2, 2], \"data\":[3, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[2],\"data\":[2, 1]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:multiply("{\"type\":\"int32\",\"shape\":[2, 2], \"data\":[3, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[2],\"data\":[2, 1]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [6, 2, 6, 4]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [6, 2, 6, 4]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -499,44 +429,34 @@ returns
 
 The result of the function is a tensor of broadcasted shape, where each element is the quotient of corresponding elements in the input tensors.
 
-<table>
-<thead><tr><th>Example 1</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example "Example 1"
 
-```sparql
-dtf:divide("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [8, 9]}", "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [2, 3]}")
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:divide("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [8, 9]}", "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [2, 3]}")
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [4, 3]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [4, 3]}"^^dt:NumericDataTensor
+    ```
 
 
-<table>
-<thead><tr><th>Example 2</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example "Example 2"
 
-```sparql
-dtf:divide("{\"type\":\"int32\",\"shape\":[2, 2], \"data\":[3, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[2],\"data\":[2, 1]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:divide("{\"type\":\"int32\",\"shape\":[2, 2], \"data\":[3, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[2],\"data\":[2, 1]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"int32\", \"shape\": [2, 2], \"data\": [1, 2, 1, 2]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"int32\", \"shape\": [2, 2], \"data\": [1, 2, 1, 2]}"^^dt:NumericDataTensor
+    ```
 
 
 ---
@@ -548,44 +468,34 @@ returns
 
 The function returns a boolean tensor with a broadcasted shape, where each element is `true` if the corresponding elements in the two tensors are equal, and `false` otherwise.
 
-<table>
-<thead><tr><th>Example 1</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example "Example 1"
 
-```sparql
-dtf:eq("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 2]}", "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 3]}")
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:eq("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 2]}", "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 3]}")
+    ```
 
-```turtle
-"{\"shape\": [1, 2], \"data\": [true, false]}"^^dt:BooleanDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"shape\": [1, 2], \"data\": [true, false]}"^^dt:BooleanDataTensor
+    ```
 
 
-<table>
-<thead><tr><th>Example 2</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example "Example 2"
 
-```sparql
-dtf:eq("\"shape\": [1, 2], \"data\": [true, false]}", "{\"shape\": [1], \"data\": [true]}")
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:eq("\"shape\": [1, 2], \"data\": [true, false]}", "{\"shape\": [1], \"data\": [true]}")
+    ```
 
-```turtle
-"{\"shape\": [1, 2], \"data\": [true, false]}"^^dt:BooleanDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"shape\": [1, 2], \"data\": [true, false]}"^^dt:BooleanDataTensor
+    ```
 
 ---
 
@@ -598,44 +508,34 @@ returns
 
 The function returns a boolean tensor with a broadcasted shape, where each element is `true` if the corresponding elements in the two tensors are not equal, and `false` otherwise.
 
-<table>
-<thead><tr><th>Example 1</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example "Example 1"
 
-```sparql
-dtf:neq("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 2]}", "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 3]}")
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:neq("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 2]}", "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1, 3]}")
+    ```
 
-```turtle
-"{\"shape\": [1, 2], \"data\": [false, true]}"^^dt:BooleanDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"shape\": [1, 2], \"data\": [false, true]}"^^dt:BooleanDataTensor
+    ```
 
 
-<table>
-<thead><tr><th>Example 2</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example "Example 2"
 
-```sparql
-dtf:neq("\"shape\": [1, 2], \"data\": [true, false]}", "{\"shape\": [1], \"data\": [true]}")
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:neq("\"shape\": [1, 2], \"data\": [true, false]}", "{\"shape\": [1], \"data\": [true]}")
+    ```
 
-```turtle
-"{\"shape\": [1, 2], \"data\": [false, true]}"^^dt:BooleanDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"shape\": [1, 2], \"data\": [false, true]}"^^dt:BooleanDataTensor
+    ```
 
 ---
 
@@ -644,24 +544,19 @@ returns
 
 The function returns a boolean tensor with a broadcasted shape, where each element is the logical AND of the input tensors.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:and("{\"shape\": [1, 2], \"data\": [true, false]}", "{\"shape\": [1, 2], \"data\": [true, true]}")
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:and("{\"shape\": [1, 2], \"data\": [true, false]}", "{\"shape\": [1, 2], \"data\": [true, true]}")
+    ```
 
-```turtle
-"{\"shape\": [1, 2], \"data\": [true, false]}"^^dt:BooleanDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"shape\": [1, 2], \"data\": [true, false]}"^^dt:BooleanDataTensor
+    ```
 
 ---
 
@@ -670,24 +565,19 @@ returns
 
 The function returns a boolean tensor with a broadcasted shape, where each element is the logical OR of the input tensors.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:or("{\"shape\": [1, 2], \"data\": [true, false]}", "{\"shape\": [1, 2], \"data\": [false, true]}")
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:or("{\"shape\": [1, 2], \"data\": [true, false]}", "{\"shape\": [1, 2], \"data\": [false, true]}")
+    ```
 
-```turtle
-"{\"shape\": [1, 2], \"data\": [true, true]}"^^dt:BooleanDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"shape\": [1, 2], \"data\": [true, true]}"^^dt:BooleanDataTensor
+    ```
 
 ---
 
@@ -696,24 +586,19 @@ returns
 
 The function returns a boolean tensor with a broadcasted shape, where each element is `true` if the corresponding element from *term_1* is greater than the corresponding element from *term_2*, and `false` otherwise.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:gt("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [4, 2]}", "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [3, 3]}")
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:gt("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [4, 2]}", "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [3, 3]}")
+    ```
 
-```turtle
-"{\"shape\": [1, 2], \"data\": [true, false]}"^^dt:BooleanDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"shape\": [1, 2], \"data\": [true, false]}"^^dt:BooleanDataTensor
+    ```
 
 ---
 
@@ -722,24 +607,19 @@ returns
 
 The function returns a boolean tensor with a broadcasted shape, where each element is `true` if the corresponding element from *term_1* is lesser than the corresponding element from *term_2*, and `false` otherwise.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:lt("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [4, 2]}", "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [3, 3]}")
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:lt("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [4, 2]}", "{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [3, 3]}")
+    ```
 
-```turtle
-"{\"shape\": [1, 2], \"data\": [false, true]}"^^dt:BooleanDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"shape\": [1, 2], \"data\": [false, true]}"^^dt:BooleanDataTensor
+    ```
 
 ### 4.3. Indexing Functions
 
@@ -754,24 +634,19 @@ returns
 
 The result of the function is a sub-tensor extracted from the input numerical tensor using the boolean or numerical index tensor. The selection depends on the structure and values of the index tensor.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:getSubDT("{\"type\":\"int32\",\"shape\":[8],\"data\":[3, 2, 3, 4, 3, 2, 3, 4]}\"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[2],\"data\":[0, 1]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:getSubDT("{\"type\":\"int32\",\"shape\":[8],\"data\":[3, 2, 3, 4, 3, 2, 3, 4]}\"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[2],\"data\":[0, 1]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"int32\", \"shape\": [1, 2], \"data\": [1, 3]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"int32\", \"shape\": [1, 2], \"data\": [1, 3]}"^^dt:NumericDataTensor
+    ```
 
 
 ### 4.4 Concatenating Functions
@@ -781,48 +656,38 @@ returns
 
 This function returns a tensor that is the concatenation of the two input tensors along the specified axis. The other dimensions must match.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:concat(0, "{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [1, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [5, 6, 7, 8]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:concat(0, "{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [1, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [5, 6, 7, 8]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [4, 2], \"data\": [1, 2, 3, 4, 5, 6, 7, 8]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [4, 2], \"data\": [1, 2, 3, 4, 5, 6, 7, 8]}"^^dt:NumericDataTensor
+    ```
 
 #### `dtf:hstack`
 [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:hstack** ([dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_2*)
 
 This function returns a tensor that is the result of horizontally stacking the two input tensors (i.e., concatenation along the last axis). The tensors must be broadcast-compatible along other dimensions.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:hstack("{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [1, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [5, 6, 7, 8]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:hstack("{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [1, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [5, 6, 7, 8]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [2, 4], \"data\": [1, 2, 5, 6, 3, 4, 7, 8]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [2, 4], \"data\": [1, 2, 5, 6, 3, 4, 7, 8]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -831,24 +696,19 @@ returns
 
 This function returns a tensor that is the result of vertically stacking the two input tensors (i.e., concatenation along the first axis). The tensors must be broadcast-compatible along other dimensions.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:vstack("{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [1, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [5, 6, 7, 8]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:vstack("{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [1, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [2, 2], \"data\": [5, 6, 7, 8]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [4, 2], \"data\": [1, 2, 3, 4, 5, 6, 7, 8]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [4, 2], \"data\": [1, 2, 3, 4, 5, 6, 7, 8]}"^^dt:NumericDataTensor
+    ```
 
 ### 4.5. Reduction Functions
 
@@ -857,24 +717,19 @@ returns
 
 This function checks if all elements in the boolean tensor are true. Returns a single boolean value.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:all("{\"shape\": [2], \"data\": [true, true]}"^^dt:BooleanDataTensor)  
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:all("{\"shape\": [2], \"data\": [true, true]}"^^dt:BooleanDataTensor)  
+    ```
 
-```turtle
-"true"^^xsd:boolean
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "true"^^xsd:boolean
+    ```
 
 ---
 
@@ -883,24 +738,19 @@ returns
 
 This function checks if any element in the boolean tensor is true. Returns a single boolean value.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:any("{\"shape\": [2], \"data\": [false, true]}"^^dt:BooleanDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:any("{\"shape\": [2], \"data\": [false, true]}"^^dt:BooleanDataTensor)
+    ```
 
-```turtle
-"true"^^xsd:boolean
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "true"^^xsd:boolean
+    ```
 
 ---
 
@@ -910,24 +760,19 @@ returns
 
 This function computes the average along the specified axis. If the axis is negative, the average is calculated over the entire tensor. It returns a reduced tensor or a scalar.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:avg(1, "{\"type\": \"float32\", \"shape\": [2,2], \"data\": [1, 2, 3, 4]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:avg(1, "{\"type\": \"float32\", \"shape\": [2,2], \"data\": [1, 2, 3, 4]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [2], \"data\": [1.5, 3.5]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [2], \"data\": [1.5, 3.5]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -937,24 +782,19 @@ returns
 
 This function computes the sum along the specified axis. If the axis is negative, the sum is calculated over the entire tensor. It returns a reduced tensor or a scalar.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:sum(1, "{\"type\": \"float32\", \"shape\": [2,2], \"data\": [1, 2, 3, 4]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:sum(1, "{\"type\": \"float32\", \"shape\": [2,2], \"data\": [1, 2, 3, 4]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [2], \"data\": [3, 7]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [2], \"data\": [3, 7]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -965,24 +805,19 @@ returns
 
 This function computes the maximum along the specified axis. If the axis is negative, the maximum is calculated over the entire tensor. It returns a reduced tensor or a scalar.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:max(1, "{\"type\": \"float32\", \"shape\": [2,2], \"data\": [1, 5, 2, 4]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:max(1, "{\"type\": \"float32\", \"shape\": [2,2], \"data\": [1, 5, 2, 4]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [2], \"data\": [5, 4]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [2], \"data\": [5, 4]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -993,24 +828,19 @@ returns
 
 This function computes the median along the specified axis. If the axis is negative, the median is calculated over the entire tensor. It returns a reduced tensor or a scalar.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:median(1, "{\"type\": \"float32\", \"shape\": [1, 3], \"data\": [7, 1, 3]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:median(1, "{\"type\": \"float32\", \"shape\": [1, 3], \"data\": [7, 1, 3]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1], \"data\": [3]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1], \"data\": [3]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -1021,24 +851,19 @@ returns
 
 This function computes the minimum along the specified axis. If the axis is negative, the minimum is calculated over the entire tensor. It returns a reduced tensor or a scalar.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:min(1, "{\"type\": \"float32\", \"shape\": [1,3], \"data\": [7, 1, 3]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:min(1, "{\"type\": \"float32\", \"shape\": [1,3], \"data\": [7, 1, 3]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1], \"data\": [1]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1], \"data\": [1]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -1049,24 +874,19 @@ returns
 
 This function computes the standard deviation along the specified axis. If the axis is negative, the standard deviation is calculated over the entire tensor. It returns a reduced tensor or a scalar.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:std(1, "{\"type\": \"float32\", \"shape\": [1,3], \"data\": [1, 2, 3]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:std(1, "{\"type\": \"float32\", \"shape\": [1,3], \"data\": [1, 2, 3]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1], \"data\": [0.8165]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1], \"data\": [0.8165]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -1077,24 +897,19 @@ returns
 
 This function computes the variance along the specified axis. If the axis is negative, the variance is calculated over the entire tensor. It returns a reduced tensor or a scalar.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:var(1, "{\"type\": \"float32\", \"shape\": [1,3], \"data\": [1, 2, 3]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:var(1, "{\"type\": \"float32\", \"shape\": [1,3], \"data\": [1, 2, 3]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [1], \"data\": [0.6667]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [1], \"data\": [0.6667]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -1105,24 +920,19 @@ returns
 
 This function computes the L1 norm (sum of absolute values) along the specified axis. If the axis is negative, the L1 norm (sum of absolute values) is calculated over the entire tensor. It returns a reduced tensor or a scalar.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:norm1(1, "{\"type\": \"float32\", \"shape\": [2,2], \"data\": [1, -1, -2, 2]}"^^dt:NumericDataTensor)  
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:norm1(1, "{\"type\": \"float32\", \"shape\": [2,2], \"data\": [1, -1, -2, 2]}"^^dt:NumericDataTensor)  
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [2], \"data\": [2, 4]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [2], \"data\": [2, 4]}"^^dt:NumericDataTensor
+    ```
 
 ---
 
@@ -1133,102 +943,87 @@ returns
 
 This function computes the L2 norm (Euclidean norm) along the specified axis. If the axis is negative, the L2 norm (Euclidean norm) is calculated over the entire tensor. It returns a reduced tensor or a scalar.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:norm2(1, "{\"type\": \"float32\", \"shape\": [2,2], \"data\": [3, 4, 6, 8]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:norm2(1, "{\"type\": \"float32\", \"shape\": [2,2], \"data\": [3, 4, 6, 8]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"{\"type\": \"float32\", \"shape\": [2], \"data\": [5, 10]}"^^dt:NumericDataTensor
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "{\"type\": \"float32\", \"shape\": [2], \"data\": [5, 10]}"^^dt:NumericDataTensor
+    ```
 
 
 ### 4.6. Similarity Functions
 
 #### `dtf:cosineSimilarity`
-[xsd:double](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:cosineSimilarity** ([dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_2*)
+[xsd:double](http://www.w3.org/2001/XMLSchema#double) **dtf:cosineSimilarity** ([dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_2*)
 
 This function computes the cosine similarity between two numerical tensors. Returns a numeric scalar value.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:cosineSimilarity( "{\"type\": \"float32\", \"shape\": [3], \"data\": [1, 0, 1]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [3], \"data\": [1, 1, 0]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:cosineSimilarity( "{\"type\": \"float32\", \"shape\": [3], \"data\": [1, 0, 1]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [3], \"data\": [1, 1, 0]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-"0.5"^^xsd:float
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    "0.5"^^xsd:float
+    ```
 
 ---
 
 #### `dtf:euclideanDistance`
-[xsd:double](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:euclideanDistance** ([dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_2*)
+[xsd:double](http://www.w3.org/2001/XMLSchema#double) **dtf:euclideanDistance** ([dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*, [dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_2*)
 
 This function computes the Euclidean distance between two numerical tensors. Returns a numeric scalar value.
 
-<table>
-<thead><tr><th>Example</th></tr></thead>
-<tbody>
-<tr><td>
-Evaluating the SPARQL expression
+!!! example
 
-```sparql
-dtf:euclideanDistance("{\"type\": \"float32\", \"shape\": [2], \"data\": [3, 4]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [2], \"data\": [0, 0]}"^^dt:NumericDataTensor)
-```
+    Evaluating the SPARQL expression
 
-returns
+    ```sparql
+    dtf:euclideanDistance("{\"type\": \"float32\", \"shape\": [2], \"data\": [3, 4]}"^^dt:NumericDataTensor, "{\"type\": \"float32\", \"shape\": [2], \"data\": [0, 0]}"^^dt:NumericDataTensor)
+    ```
 
-```turtle
-`"5.0"^^xsd:float
-```
-</td></tr> 
-</tbody>
-</table>
+    returns
+
+    ```turtle
+    `"5.0"^^xsd:float
+    ```
 
 ## 5. SPARQL Aggregates
 
 The following aggregation functions are implemented as SPARQL extension aggregates. Each function operates over NumericDataTensor values and returns a NumericDataTensor with the most precise type used within each group. These functions do not support the DISTINCT modifier.
 
 ### `dta:sum`
-- **IRI:** `http://example.org/data-tensor/aggregators#sum`
+- **IRI:** `https://w3id.org/rdf-tensor/aggregates#sum`
 - **Description:** Sums grouped numeric tensors element-wise.
 - **Input:** A group of `NumericDataTensor` values.
 - **Output:** A `NumericDataTensor` representing the element-wise sum of all tensors in the group.
 
 ### `dta:avg`
-- **IRI:** `http://example.org/data-tensor/aggregators#avg`
+- **IRI:** `https://w3id.org/rdf-tensor/aggregates#avg`
 - **Description:** Computes the element-wise average of grouped tensors.
 - **Input:** A group of `NumericDataTensor` values.
 - **Output:** A `NumericDataTensor` representing the average tensor.
 
 ### `dta:var`
-- **IRI:** `http://example.org/data-tensor/aggregators#var`
+- **IRI:** `https://w3id.org/rdf-tensor/aggregates#var`
 - **Description:** Calculates the element-wise variance across grouped tensors.
 - **Input:** A group of `NumericDataTensor` values.
 - **Output:** A `NumericDataTensor` representing the variance tensor.
 
 ### `dta:std`
-- **IRI:** `http://example.org/data-tensor/aggregators#std`
+- **IRI:** `https://w3id.org/rdf-tensor/aggregates#std`
 - **Description:** Computes the element-wise standard deviation across grouped tensors.
 - **Input:** A group of `NumericDataTensor` values.
 - **Output:** A `NumericDataTensor` representing the standard deviation tensor.
