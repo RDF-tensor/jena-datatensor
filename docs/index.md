@@ -633,6 +633,12 @@ The function returns a boolean tensor with a broadcasted shape, where each eleme
 [dt:BooleanDataTensor](https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor) **dtf:getSubDT** ([dt:BooleanDataTensor](https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor) *tensor*, [dt:BooleanDataTensor](https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor) *indexTensor*)
 
 The result of the function is a sub-tensor extracted from the input numerical tensor using the boolean or numerical index tensor. The selection depends on the structure and values of the index tensor.
+* When the *tensor* is 1-dimensional, the *index tensor* is a 1-dimensional tensor of indices, and the result is a 1-dimensional tensor containing the elements at those indices.
+* When the tensor is multi-dimensional, and the number of rows in the *index tensor* is equal to the number of dimensions in the tensor, the index tensor is a 2-dimensional tensor where each row contains indices for each dimension. The result is a 1-dimensional tensor containing the elements at those indices.
+* When the tensor is multi-dimensional, and the number of rows in the *index tensor* is not equal to the number of dimensions in the tensor, than slice indexing is performed.
+    - The index tensor is 1-dimensional, than slicing is performed along the first dimension, and the result is a tensor with the same number of dimensions as the input tensor, but with the first dimension reduced to the length of the *index tensor*.
+    - The index tensor is 2-dimensional, than slicing is performed firstly the first dimension, and then the second dimension, and the result is a tensor with the same number of dimensions as the input tensor, but with the first two dimensions reduced to the lengths of the *index tensor*.
+    - When the index tensor is more than 3-dimensional, the function will raise an error, as it is not supported.
 
 !!! example
 
