@@ -290,6 +290,25 @@ The result of the function is a tensor of the same shape as the input tensor, wh
 
 ---
 
+#### `dtf:cast`
+[dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:cast** ([dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*, xsd:string *type*)
+
+The result of the function is a tensor of the same shape as the input tensor, where each element is cast to the specified type. The supported types are: `float16`, `float32`, `float64`, `int16`, `int32`, and `int64`.
+
+!!! example
+
+    Evaluating the SPARQL expression
+
+    ```sparql
+    dtf:cast("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1.5, 2.5]}"^^dt:NumericDataTensor, "int32")
+    ```
+
+    returns
+
+    ```turtle
+    "{\"type\": \"int32\", \"shape\": [1, 2], \"data\": [1, 2]}"^^dt:NumericDataTensor
+    ```
+
 ### 4.2 Operators
 
 When using the binary operators, the input tensors are broadcasted to a common shape. The broadcasting rules are the same as in NumPy**[[NumPy 8259](#numpy)]**. In the case of numeric tensors, the result of the mathematical operation is a tensor with the more precise type of the two input tensors. For example, if one tensor is `float32` and the other is `int32`, the result will be `float32`. 
@@ -633,20 +652,79 @@ The function returns a boolean tensor with a broadcasted shape, where each eleme
 [dt:BooleanDataTensor](https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor) **dtf:getSubDT** ([dt:BooleanDataTensor](https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor) *tensor*, [dt:BooleanDataTensor](https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor) *indexTensor*)
 
 The result of the function is a sub-tensor extracted from the input numerical tensor using the boolean or numerical index tensor. The selection depends on the structure and values of the index tensor.
+* When the *tensor* is 1-dimensional, the *index tensor* is a 1-dimensional tensor of indices, and the result is a 1-dimensional tensor containing the elements at those indices.
+  !!! example
+    Evaluating the SPARQL expression
+    ```sparql
+        dtf:getSubDT("{\"type\":\"int32\",\"shape\":[8],\"data\":[3, 2, 3, 4, 3, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[2],\"data\":[0, 1]}"^^dt:NumericDataTensor)
+    ```
 
-!!! example
+      returns
+
+    ```turtle
+        "{\"type\": \"int32\", \"shape\": [1, 2], \"data\": [1, 3]}"^^dt:NumericDataTensor
+    ```
+  
+  * When the tensor is multi-dimensional, and the number of rows in the *index tensor* is equal to the number of dimensions in the tensor, the index tensor is a 2-dimensional tensor where each row contains indices for each dimension. The result is a 1-dimensional tensor containing the elements at those indices.
+    !!! example
 
     Evaluating the SPARQL expression
 
     ```sparql
-    dtf:getSubDT("{\"type\":\"int32\",\"shape\":[8],\"data\":[3, 2, 3, 4, 3, 2, 3, 4]}\"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[2],\"data\":[0, 1]}"^^dt:NumericDataTensor)
+      dtf:getSubDT("{\"type\":\"int32\",\"shape\":[2, 2],\"data\":[3, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[2, 2],\"data\":[0, 1, 1, 0]}"^^dt:NumericDataTensor)
     ```
-
-    returns
-
+    
+        returns
+  
     ```turtle
-    "{\"type\": \"int32\", \"shape\": [1, 2], \"data\": [1, 3]}"^^dt:NumericDataTensor
+      "{\"type\": \"int32\", \"shape\": [2], \"data\": [3, 4]}"^^dt:NumericDataTensor
     ```
+
+      * When the tensor is multi-dimensional, and the number of rows in the *index tensor* is not equal to the number of dimensions in the tensor, than slice indexing is performed.
+          - The index tensor is 1-dimensional (it has to be row vector), than slicing is performed along the first dimension, and the result is a tensor with the same number of dimensions as the input tensor, but with the first dimension reduced to the length of the *index tensor*.
+            !!! example
+
+            Evaluating the SPARQL expression
+        
+            ```sparql
+              dtf:getSubDT("{\"type\":\"int32\",\"shape\":[2, 2, 2],\"data\":[1, 2, 3, 4, 5, 6, 7, 8]}"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[1, 1],\"data\":[1]}"^^dt:NumericDataTensor)
+            ```
+        
+                returns
+        
+            ```turtle
+              "{\"type\": \"int32\", \"shape\": [2, 2], \"data\": [5, 6, 7, 8]}"^^dt:NumericDataTensor
+            ```
+    
+          - The index tensor is 2-dimensional, than slicing is performed firstly the first dimension, and then the second dimension, and the result is a tensor with the same number of dimensions as the input tensor, but with the first two dimensions reduced to the lengths of the *index tensor*.
+            !!! example 
+            Evaluating the SPARQL expression
+            
+            ```sparql
+                dtf:getSubDT("{\"type\":\"int32\",\"shape\":[2, 2, 2],\"data\":[1, 2, 3, 4, 5, 6, 7, 8]}"^^dt:NumericDataTensor, "{\"type\":\"int32\",\"shape\":[2, 2],\"data\":[0, 0, 1, 1]}"^^dt:NumericDataTensor)
+            ```
+        
+                  returns
+        
+            ```turtle
+                "{\"type\": \"int32\", \"shape\": [2], \"data\": [3, 4, 3, 4]}"^^dt:NumericDataTensor
+            ```
+            
+          - When the index tensor is more than 3-dimensional, the function will raise an error, as it is not supported.
+  * If the index tensor is a boolean tensor, it is used to select elements from the input tensor based on the `true` values in the index tensor. The result is a 1-dimensional tensor containing the selected elements from the flattened tensor.
+      !!! example
+                
+      Evaluating the SPARQL expression
+                
+      ```sparql
+          dtf:getSubDT("{\"type\":\"int32\",\"shape\":[2, 2],\"data\":[3, 2, 3, 4]}"^^dt:NumericDataTensor, "{\"type\":\"bool\",\"shape\":[2, 2],\"data\":[true, false, true, true]}"^^dt:BooleanDataTensor)
+      ```
+            
+          returns
+            
+      ```turtle
+          "{\"type\": \"int32\", \"shape\": [3], \"data\": [3, 3, 4]}"^^dt:NumericDataTensor
+      ```
 
 
 ### 4.4 Concatenating Functions
