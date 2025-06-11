@@ -1,6 +1,5 @@
 package pl.edu.pw.mini.jena.datatensor.functions.indexers;
 
-import org.apache.jena.datatypes.RDFDatatype;
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.sparql.expr.NodeValue;
 import org.nd4j.linalg.api.buffer.DataType;
@@ -36,8 +35,7 @@ public class GetSubDT extends GenericDT2FunctionBase {
         data = data.ravel();
         mask = mask.ravel();
 
-        int count = mask.sumNumber().intValue();
-
+        int count = mask.castTo(DataType.INT32).sumNumber().intValue();
         INDArray result = Nd4j.create(count);
 
         int index = 0;

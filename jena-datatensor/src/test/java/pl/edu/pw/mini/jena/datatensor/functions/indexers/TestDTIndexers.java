@@ -79,7 +79,14 @@ public class TestDTIndexers {
 
     @Test
     public void getSubDTTest13() {
-        test("dtf:getSubDT(\"{\\\"type\\\":\\\"int32\\\",\\\"shape\\\":[2, 2],\\\"data\\\":[3, 2, 3, 4]}\"^^dt:NumericDataTensor, \"{\\\"shape\\\":[2, 2],\\\"data\\\":[true, false, true, true]}\"^^dt:BooleanDataTensor)",
-                "\"{\"type\": \"int32\", \"shape\": [3], \"data\": [3, 3, 4]}\"^^dt:NumericDataTensor\"");
+        test("dtf:getSubDT(\"{\\\"type\\\":\\\"int32\\\",\\\"shape\\\":[2,2],\\\"data\\\":[3,2,3,4]}\"^^dt:NumericDataTensor, \"{\\\"shape\\\":[2,2],\\\"data\\\":[true,false,true,true]}\"^^dt:BooleanDataTensor)",
+                "\"{\\\"type\\\":\\\"int32\\\",\\\"shape\\\":[3],\\\"data\\\":[3,3,4]}\"^^dt:NumericDataTensor");
     }
+
+    @Test
+    public void getSubDTTest14() {
+        test("dtf:getSubDT(\"{\\\"type\\\":\\\"float64\\\",\\\"shape\\\":[2,2,2],\\\"data\\\":[1,2,3,4,3,2,3,4]}\"^^dt:NumericDataTensor, \"{\\\"shape\\\":[8],\\\"data\\\":[true,false,true,false,true,false,true,false]}\"^^dt:BooleanDataTensor)",
+                "\"{\\\"type\\\":\\\"float64\\\",\\\"shape\\\":[4],\\\"data\\\":[1,3,3,3]}\"^^dt:NumericDataTensor");
+    }
+
 }
