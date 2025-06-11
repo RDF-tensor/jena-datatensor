@@ -2,22 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://rdf-tensor.github.io/jena-datatensor/</loc>
-         <lastmod>2025-05-25</lastmod>
+         <lastmod>2025-06-11</lastmod>
     </url>
     <url>
          <loc>https://rdf-tensor.github.io/jena-datatensor/ontology/aggregates/</loc>
-         <lastmod>2025-05-25</lastmod>
+         <lastmod>2025-06-11</lastmod>
     </url>
     <url>
          <loc>https://rdf-tensor.github.io/jena-datatensor/ontology/datatypes/</loc>
-         <lastmod>2025-05-25</lastmod>
+         <lastmod>2025-06-11</lastmod>
     </url>
     <url>
          <loc>https://rdf-tensor.github.io/jena-datatensor/ontology/functions/</loc>
-         <lastmod>2025-05-25</lastmod>
+         <lastmod>2025-06-11</lastmod>
     </url>
     <url>
          <loc>https://rdf-tensor.github.io/jena-datatensor/ontology/files/</loc>
-         <lastmod>2025-05-25</lastmod>
+         <lastmod>2025-06-11</lastmod>
     </url>
 </urlset>
