@@ -290,6 +290,25 @@ The result of the function is a tensor of the same shape as the input tensor, wh
 
 ---
 
+#### `dtf:cast`
+[dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) **dtf:cast** ([dt:NumericDataTensor](https://w3id.org/rdf-tensor/datatypes#NumericDataTensor) *term_1*, xsd:string *type*)
+
+The result of the function is a tensor of the same shape as the input tensor, where each element is cast to the specified type. The supported types are: `float16`, `float32`, `float64`, `int16`, `int32`, and `int64`.
+
+!!! example
+
+    Evaluating the SPARQL expression
+
+    ```sparql
+    dtf:cast("{\"type\": \"float32\", \"shape\": [1, 2], \"data\": [1.5, 2.5]}"^^dt:NumericDataTensor, "int32")
+    ```
+
+    returns
+
+    ```turtle
+    "{\"type\": \"int32\", \"shape\": [1, 2], \"data\": [1, 2]}"^^dt:NumericDataTensor
+    ```
+
 ### 4.2 Operators
 
 When using the binary operators, the input tensors are broadcasted to a common shape. The broadcasting rules are the same as in NumPy**[[NumPy 8259](#numpy)]**. In the case of numeric tensors, the result of the mathematical operation is a tensor with the more precise type of the two input tensors. For example, if one tensor is `float32` and the other is `int32`, the result will be `float32`. 

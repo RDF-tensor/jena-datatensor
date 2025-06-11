@@ -21,6 +21,7 @@ public class FunctionsDT {
     public static final String SIN_TRANSFORM = FunctionsDT.getURI() + "sin";
     public static final String ABS_TRANSFORM = FunctionsDT.getURI() + "abs";
     public static final String NOT_TRANSFORM = FunctionsDT.getURI() + "not";
+    public static final String CAST_TRANSFORM = FunctionsDT.getURI() + "cast";
 
     // Operators
     public static final String ADD = FunctionsDT.getURI() + "add";

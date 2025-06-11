@@ -269,5 +269,40 @@ public class TestDTTransformers {
                 "\"{\\\"type\\\":\\\"float64\\\",\\\"shape\\\":[2,2],\\\"data\\\":[-3.0,-6.0,-5.0,-4.0]}\"^^dt:NumericDataTensor");
     }
 
+    @Test
+    public void castTransformerTest1() {
+        test("dtf:cast(\"{\\\"type\\\":\\\"int32\\\",\\\"shape\\\":[1,2,2],\\\"data\\\":[1,2,3,4]}\"^^dt:NumericDataTensor, \"int64\")",
+                "\"{\\\"type\\\":\\\"int64\\\",\\\"shape\\\":[1,2,2],\\\"data\\\":[1,2,3,4]}\"^^dt:NumericDataTensor");
+    }
+
+    @Test
+    public void castTransformerTest2() {
+        test("dtf:cast(\"{\\\"type\\\":\\\"int32\\\",\\\"shape\\\":[1,2,2],\\\"data\\\":[1,2,3,4]}\"^^dt:NumericDataTensor, \"float64\")",
+                "\"{\\\"type\\\":\\\"float64\\\",\\\"shape\\\":[1,2,2],\\\"data\\\":[1.0,2.0,3.0,4.0]}\"^^dt:NumericDataTensor");
+    }
+
+    @Test
+    public void castTransformerTest3() {
+        test("dtf:cast(\"{\\\"type\\\":\\\"int32\\\",\\\"shape\\\":[1,2,2],\\\"data\\\":[1,2,3,4]}\"^^dt:NumericDataTensor, \"float32\")",
+                "\"{\\\"type\\\":\\\"float32\\\",\\\"shape\\\":[1,2,2],\\\"data\\\":[1.0,2.0,3.0,4.0]}\"^^dt:NumericDataTensor");
+    }
+
+    @Test
+    public void castTransformerTest4() {
+        test("dtf:cast(\"{\\\"type\\\":\\\"int32\\\",\\\"shape\\\":[4],\\\"data\\\":[1,2,3,4]}\"^^dt:NumericDataTensor, \"int16\")",
+                "\"{\\\"type\\\":\\\"int16\\\",\\\"shape\\\":[4],\\\"data\\\":[1,2,3,4]}\"^^dt:NumericDataTensor");
+    }
+
+    @Test
+    public void castTransformerTest5() {
+        test("dtf:cast(\"{\\\"type\\\":\\\"int64\\\",\\\"shape\\\":[2,2],\\\"data\\\":[1,2,3,4]}\"^^dt:NumericDataTensor, \"int32\")",
+                "\"{\\\"type\\\":\\\"int32\\\",\\\"shape\\\":[2,2],\\\"data\\\":[1,2,3,4]}\"^^dt:NumericDataTensor");
+    }
+
+    @Test(expected = ExprEvalException.class)
+    public void castTransformerTest6() {
+        testError("dtf:cast(\"{\\\"type\\\":\\\"int32\\\",\\\"shape\\\":[1,2,2],\\\"data\\\":[1,2,3,4]}\"^^dt:NumericDataTensor, \"string\")");
+    }
+
 
 }
