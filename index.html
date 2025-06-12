@@ -2326,8 +2326,10 @@ After parsing, the JSON object is converted into a tensor structure.</p>
 <p><a href="https://w3id.org/rdf-tensor/datatypes#NumericDataTensor">dt:NumericDataTensor</a> <strong>dtf:getSubDT</strong> (<a href="https://w3id.org/rdf-tensor/datatypes#NumericDataTensor">dt:NumericDataTensor</a> <em>tensor</em>, <a href="https://w3id.org/rdf-tensor/datatypes#DataTensor">dt:BooleanDataTensor</a> <em>indexTensor</em>)</p>
 <p><a href="https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor">dt:BooleanDataTensor</a> <strong>dtf:getSubDT</strong> (<a href="https://w3id.org/rdf-tensor/datatypes#NumericDataTensor">dt:BooleanDataTensor</a> <em>tensor</em>, <a href="https://w3id.org/rdf-tensor/datatypes#DataTensor">dt:NumericDataTensor</a> <em>indexTensor</em>)</p>
 <p><a href="https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor">dt:BooleanDataTensor</a> <strong>dtf:getSubDT</strong> (<a href="https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor">dt:BooleanDataTensor</a> <em>tensor</em>, <a href="https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor">dt:BooleanDataTensor</a> <em>indexTensor</em>)</p>
-<p>The result of the function is a sub-tensor extracted from the input numerical tensor using the boolean or numerical index tensor. The selection depends on the structure and values of the index tensor.
-* When the <em>tensor</em> is 1-dimensional, the <em>index tensor</em> is a 1-dimensional tensor of indices, and the result is a 1-dimensional tensor containing the elements at those indices.</p>
+<p>The result of the function is a sub-tensor extracted from the input numerical tensor using the boolean or numerical index tensor. The selection depends on the structure and values of the index tensor.</p>
+<ul>
+<li>When the <em>tensor</em> is 1-dimensional, the <em>index tensor</em> is a 1-dimensional tensor of indices, and the result is a 1-dimensional tensor containing the elements at those indices.</li>
+</ul>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p>Evaluating the SPARQL expression
@@ -2350,8 +2352,12 @@ After parsing, the JSON object is converted into a tensor structure.</p>
 </span></code></pre></div>
 </div>
 <ul>
-<li>When the tensor is multi-dimensional, and the number of rows in the <em>index tensor</em> is not equal to the number of dimensions in the tensor, than slice indexing is performed.</li>
-<li>The index tensor is 1-dimensional (it has to be row vector), than slicing is performed along the first dimension, and the result is a tensor with the same number of dimensions as the input tensor, but with the first dimension reduced to the length of the <em>index tensor</em>.</li>
+<li>
+<p>When the tensor is multi-dimensional, and the number of rows in the <em>index tensor</em> is not equal to the number of dimensions in the tensor, than slice indexing is performed (depends on the index tensor dimensionality).</p>
+</li>
+<li>
+<p>The index tensor is 1-dimensional (it has to be row vector), than slicing is performed along the first dimension, and the result is a tensor with the same number of dimensions as the input tensor, but with the first dimension reduced to the length of the <em>index tensor</em>.</p>
+</li>
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
