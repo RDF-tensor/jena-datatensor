@@ -652,6 +652,7 @@ The function returns a boolean tensor with a broadcasted shape, where each eleme
 [dt:BooleanDataTensor](https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor) **dtf:getSubDT** ([dt:BooleanDataTensor](https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor) *tensor*, [dt:BooleanDataTensor](https://w3id.org/rdf-tensor/datatypes#BooleanDataTensor) *indexTensor*)
 
 The result of the function is a sub-tensor extracted from the input numerical tensor using the boolean or numerical index tensor. The selection depends on the structure and values of the index tensor.
+
 * When the *tensor* is 1-dimensional, the *index tensor* is a 1-dimensional tensor of indices, and the result is a 1-dimensional tensor containing the elements at those indices.
 
 !!! example
@@ -683,7 +684,8 @@ The result of the function is a sub-tensor extracted from the input numerical te
     "{\"type\": \"int32\", \"shape\": [2], \"data\": [3, 4]}"^^dt:NumericDataTensor
     ```
 
-* When the tensor is multi-dimensional, and the number of rows in the *index tensor* is not equal to the number of dimensions in the tensor, than slice indexing is performed.
+* When the tensor is multi-dimensional, and the number of rows in the *index tensor* is not equal to the number of dimensions in the tensor, than slice indexing is performed (depends on the index tensor dimensionality).
+  
   - The index tensor is 1-dimensional (it has to be row vector), than slicing is performed along the first dimension, and the result is a tensor with the same number of dimensions as the input tensor, but with the first dimension reduced to the length of the *index tensor*.
 
 !!! example
@@ -702,7 +704,8 @@ The result of the function is a sub-tensor extracted from the input numerical te
     
   - The index tensor is 2-dimensional, than slicing is performed firstly the first dimension, and then the second dimension, and the result is a tensor with the same number of dimensions as the input tensor, but with the first two dimensions reduced to the lengths of the *index tensor*.
               
-!!! example 
+!!! example
+
     Evaluating the SPARQL expression
             
     ```sparql
@@ -719,7 +722,8 @@ The result of the function is a sub-tensor extracted from the input numerical te
 
 * If the index tensor is a boolean tensor, it is used to select elements from the input tensor based on the `true` values in the index tensor. The result is a 1-dimensional tensor containing the selected elements from the flattened tensor.
 
-!!! example 
+!!! example  
+
     Evaluating the SPARQL expression
                 
     ```sparql
