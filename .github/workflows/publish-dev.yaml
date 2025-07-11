@@ -22,14 +22,10 @@ jobs:
           cache: pip
           cache-dependency-path: requirements.txt
   
+      - uses: Jelly-RDF/setup-cli@v1
+
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - name: Install jelly-cli
-        run: |
-          wget -O /opt/jelly-cli https://github.com/Jelly-RDF/cli/releases/download/v0.2.0/jelly-cli-linux-x86_64
-          chmod +x /opt/jelly-cli
-          echo '/opt' >> $GITHUB_PATH
 
       - name: 'Convert ontologies, prepare for publishing'
         run: |
