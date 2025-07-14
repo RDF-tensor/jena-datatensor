@@ -6,12 +6,11 @@
 
 # Run this script from the root of the repository.
 
-# TODO: add support for outputting to JSON-LD and RDF/XML in jelly-cli
 formats=(
   "ttl"
-  #"jsonld"
+  "jsonld"
   "nt"
-  #"rdf"
+  "rdf"
 )
 
 mkdir -p publish
