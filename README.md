@@ -1,23 +1,17 @@
 # jena-datatensor
 
-## [See the website](https://rdf-tensor.github.io/jena-datatensor/) for more information.
+**⚠️⚠️⚠️ THIS REPOSITORY IS NO LONGER MAINTAINED, FURTHER WORK WAS MOVED TO [https://github.com/NeverBlink-OSS/rdf-tensor](https://github.com/NeverBlink-OSS/rdf-tensor) ⚠️⚠️⚠️**
+
+This repo contains an **OUTDATED** version of the RDF-tensor spec that is no longer maintained. We continue this work [here](https://github.com/NeverBlink-OSS/rdf-tensor), with new functions, bugfixes, and other improvements.
+
+**[See the website](https://w3id.org/rdf-tensor) for more information.**
 
 This is a proposed extension to RDF and SPARQL that introduces 2 new datatypes, 37 SPARQL functions, and 6 new aggregates to enhance the processing of data tensors within RDF models. A data tensor is a multi-dimensional array of values, which can be numeric or boolean, commonly used for example in machine learning embeddings.
 
+## Example dataset
+
 `example_dataset_and_queries` contains a sligthly modified subset of CS publications knowledge graph, which was a part of [bachelor thesis](https://repo.pw.edu.pl/info/bachelor/WUTb11175cba06e497caab92c07f490c673?r=supervisedwork&ps=20&tab=&title=Engineers%2B%2B%2BBachelors%2Btheses%2B%25E2%2580%2593%2BComputer%2Bscience%2Bpublications%2Bknowledge%2Bgraph%2B%25E2%2580%2593%2BWarsaw%2BUniversity%2Bof%2BTechnology&lang=en) and queries to demonstrate the usage of the implemented functions and aggregates.
 This dataset is under fair use license and is provided for educational purposes only.
-
-## Features
-
-- **New Datatypes:**
-  - `dt:NumericDataTensor` – Designed for storing tensors containing numeric values.
-  - `dt:BooleanDataTensor` – Intended for storing tensors containing boolean values.
-- **37 New SPARQL Functions:**
-  - Tensor manipulations (addition, multiplication, reshaping, etc.)
-  - Algebraic computations
-- **6 New Aggregates:**
-  - Generalized aggregation functions for numerical tensors
-  - Sum, average, variance, and standard deviation computations
 
 ## Installation
 
@@ -34,7 +28,7 @@ This dataset is under fair use license and is provided for educational purposes 
 
 ## Implemented datatypes, functions, aggregates, ontology files
 
-**[See the website](https://rdf-tensor.github.io/jena-datatensor/) for more details.**
+**[See the website](https://w3id.org/rdf-tensor) for more details.**
 
 ## Authors, licensing
 
