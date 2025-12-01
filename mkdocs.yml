@@ -8,6 +8,12 @@ edit_uri: edit/main/docs/
 plugins:
   - search
   - include-markdown
+  - redirects:
+      redirect_maps:
+        'index.md': 'https://w3id.org/rdf-tensor'
+        'ontology/datatypes.md': 'https://w3id.org/rdf-tensor'
+        'ontology/functions.md': 'https://w3id.org/rdf-tensor'
+        'ontology/aggregates.md': 'https://w3id.org/rdf-tensor'
 
 markdown_extensions:
   - attr_list
